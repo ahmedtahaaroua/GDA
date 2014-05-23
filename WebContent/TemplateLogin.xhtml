@@ -1,0 +1,84 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+	
+	 <h:head>
+        <title><ui:insert name="title">GDA</ui:insert></title>
+        <h:outputStylesheet library="css" name="jsfcrud.css"/>
+        <link type="text/css" rel="stylesheet" href="resources/css/style.css" /> 
+        
+        <h:outputScript library="js" name="jsfcrud.js"/>
+    </h:head>
+	
+	
+	
+	<h:head>
+	</h:head>
+	<h:body>
+	    <header id="header" >
+				<div id="logo">
+
+					
+				</div>
+				<div id="login_menu">
+				
+				
+				<h:form id="menuForm">
+<!--                     <p:menubar> -->
+<!--                         <p:menuitem value="#{bundle.Home}" outcome="/login/dialogLogin.xhtml" icon="ui-icon-home"/> -->
+                       
+<!--                     </p:menubar> -->
+
+
+				<p:layoutUnit position="center">
+                <ui:insert name="body"/>
+				</p:layoutUnit>
+                </h:form>
+				
+					
+				</div>
+				<div class="clear"></div>
+		</header>
+		
+		<div id="menu">
+		<div id="home_icon"></div>
+		<h:form>
+		<ul>
+		<li>
+		<h:commandLink action="index" value="Home"  />
+	    </li>
+	    <li>
+		<h:commandLink action="about" value="About Us"  />
+	    </li>
+	    <li>
+		<h:commandLink action="contact" value="Contact Us"  />
+	    </li>
+			
+		</ul>
+		</h:form>
+		</div>
+		<div id="slider">
+		
+		<div class="slider-content">
+		<h1>Gestion de Stock</h1>
+		<hr></hr>
+		<h2>Gestion d'Approvisionnement entre les magasins</h2>
+		</div>
+		
+		</div>
+		
+		<footer>
+		<p class="copyright">Copyright Gestion d'Approvisionnement entre les magasins 2014 </p>
+		</footer>
+	</h:body>
+</html>
+
+
+
+
+   
+    

@@ -1,49 +1,68 @@
-<?xml version='1.0' encoding='UTF-8' ?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="http://xmlns.jcp.org/jsf/html">
-    <h:head>
-        <title>Facelet Title</title>
-        <h:outputStylesheet name="css/jsfcrud.css"/>
-    </h:head>
-    <h:body>
-        Hello from Facelets
-        <br />
-        <h:link outcome="welcomePrimefaces" value="Primefaces welcome page" />
-        <br />
-        <h:link outcome="/approvisionemment/List" value="Show All Approvisionemment Items"/>
-        <br />
-        <h:link outcome="/commande/List" value="Show All Commande Items"/>
-        <br />
-        <h:link outcome="/famille/List" value="Show All Famille Items"/>
-        <br />
-        <h:link outcome="/fournisseurs/List" value="Show All Fournisseurs Items"/>
-        <br />
-        <h:link outcome="/ligneCommande/List" value="Show All LigneCommande Items"/>
-        <br />
-        <h:link outcome="/ligneTransfert/List" value="Show All LigneTransfert Items"/>
-        <br />
-        <h:link outcome="/ligneapprovisionnement/List" value="Show All Ligneapprovisionnement Items"/>
-        <br />
-        <h:link outcome="/lignelivraison/List" value="Show All Lignelivraison Items"/>
-        <br />
-        <h:link outcome="/lignelivraisonmagasin/List" value="Show All Lignelivraisonmagasin Items"/>
-        <br />
-        <h:link outcome="/livraisonmagasin/List" value="Show All Livraisonmagasin Items"/>
-        <br />
-        <h:link outcome="/lot/List" value="Show All Lot Items"/>
-        <br />
-        <h:link outcome="/magasin/List" value="Show All Magasin Items"/>
-        <br />
-        <h:link outcome="/magasinproduit/List" value="Show All Magasinproduit Items"/>
-        <br />
-        <h:link outcome="/produit/List" value="Show All Produit Items"/>
-        <br />
-        <h:link outcome="/transfert/List" value="Show All Transfert Items"/>
-        <br />
-        <h:link outcome="/utilisateur/List" value="Show All Utilisateur Items"/>
-    </h:body>
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
 
 
+  <ui:composition template="TemplateLogin.xhtml">
+
+<!--         <ui:define name="title"> -->
+<!--             <h:outputText value="#{bundle.ListLocalTitle}"></h:outputText> -->
+<!--         </ui:define> -->
+
+        <ui:define name="body">
+        
+        <style>
+        	.ui-widget-content
+        	{
+        		border: none !important;
+        	}
+        </style>
+        
+        
+            <h:form id="form">  
+                <h:outputLink id="loginLink"  class="link_header"  value="javascript:void(0)"  onclick="PF('dlg').show()" title="login">   
+                <span>Login</span>
+                 </h:outputLink>  
+			
+                <p:growl id="growl" showDetail="true" life="3000" />  
+
+                <p:dialog id="dialog" header="Login" widgetVar="dlg" resizable="false">  
+
+                    <h:panelGrid columns="2" cellpadding="5">  
+                        <h:outputLabel for="username" value="Username:" />  
+                        <p:inputText value="#{loginBean.username}"   
+                                     id="username"  label="username" />  
+
+                        <h:outputLabel for="password" value="Password:" />  
+                        <h:inputSecret value="#{loginBean.passwd}"   
+                                       id="password"  label="password" />  
+
+                        <f:facet name="footer">  
+                            <p:commandButton id="loginButton" value="Login" update="growl"   
+                                             actionListener="#{loginBean.login}"   
+                                             oncomplete="handleLoginRequest(xhr, status, args)"/>  
+                        </f:facet>  
+                    </h:panelGrid>  
+
+                </p:dialog>  
+                
+            </h:form>  
+
+            <script type="text/javascript">
+                function handleLoginRequest(xhr, status, args) {
+                    if (args.validationFailed || !args.loggedIn) {
+                        PF('dlg').jq.effect("shake", {times: 5}, 100);
+                    }
+                    else {
+                        PF('dlg').hide();
+                        $('#loginLink').fadeOut();
+                    }
+                }
+          
+            </script>
+        </ui:define>
+ </ui:composition>
 </html>
-

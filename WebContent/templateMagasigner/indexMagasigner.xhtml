@@ -1,0 +1,36 @@
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+
+   <ui:composition template="/templateMagasigner/template.xhtml">
+
+<!--         <ui:define name="title"> -->
+<!--             <h:outputText value="#{bundle.ListLocalTitle}"></h:outputText> -->
+<!--         </ui:define> -->
+
+        <ui:define name="body">
+        
+      
+        
+        Magasigner
+          
+
+            <script type="text/javascript">
+                function handleLoginRequest(xhr, status, args) {
+                    if (args.validationFailed || !args.loggedIn) {
+                        PF('dlg').jq.effect("shake", {times: 5}, 100);
+                    }
+                    else {
+                        PF('dlg').hide();
+                        $('#loginLink').fadeOut();
+                    }
+                }
+          
+            </script>
+        </ui:define>
+ </ui:composition>
+</html>
