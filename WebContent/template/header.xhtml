@@ -20,6 +20,10 @@
 	</div>
 	
 </h:form>
-<p:button outcome="/index.xhtml" value="Déconnecter"> </p:button> 
+<p:menubar style="float:right;">
+    <p:menuitem>connecté : #{loginBean.selectedClient.nom}  #{loginBean.selectedClient.prenom}</p:menuitem>  
+
+    <p:menuitem value="Déconnecter" url="/index.xhtml" icon="ui-icon ui-icon-close" />
+    </p:menubar>  
 </ui:composition>
 

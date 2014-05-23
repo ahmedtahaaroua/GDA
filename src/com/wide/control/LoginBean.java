@@ -50,7 +50,13 @@ public class LoginBean implements Serializable {
 
 	
 	
-    public void login(ActionEvent actionEvent) {
+    public Utilisateur getSelectedClient() {
+		return selectedClient;
+	}
+	public void setSelectedClient(Utilisateur selectedClient) {
+		this.selectedClient = selectedClient;
+	}
+	public void login(ActionEvent actionEvent) {
         RequestContext context = RequestContext.getCurrentInstance();
         FacesMessage msg = null;
         boolean loggedIn = false;
@@ -60,7 +66,7 @@ public class LoginBean implements Serializable {
     	for (Utilisateur c :utilisateurs ) {
         if(username != null && username.equals(c.getLogin()) && passwd != null && passwd.equals(c.getMotPasse())) {
                 loggedIn = true;
-                
+            selectedClient = c;
                 msg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Welcome", username);
                if ( c.getType().equals("magasigner"))
                {

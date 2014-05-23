@@ -1,5 +1,6 @@
 package com.wide.control;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
@@ -23,7 +24,7 @@ import com.wide.model.Fournisseurs;
 public class FournisseursController implements Serializable {
 
     private FournisseursFacade ejbFacade;
-    private List<Fournisseurs> items = null;
+    private List<Fournisseurs> items= new ArrayList<Fournisseurs>() ;
     private Fournisseurs selected;
 
     public FournisseursController() {
@@ -73,9 +74,9 @@ public class FournisseursController implements Serializable {
     }
 
     public List<Fournisseurs> getItems() {
-        if (items == null) {
+      
             items = getFacade().findAll();
-        }
+        
         return items;
     }
 
