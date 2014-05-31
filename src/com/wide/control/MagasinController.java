@@ -14,6 +14,10 @@ import javax.faces.convert.Converter;
 import javax.faces.convert.FacesConverter;
 import javax.faces.model.DataModel;
 import javax.faces.model.ListDataModel;
+
+import javax.faces.model.SelectItem;
+
+
 import javax.inject.Named;
 
 import com.wide.dao.MagasinFacade;
@@ -28,6 +32,7 @@ public class MagasinController implements Serializable {
 
     private MagasinFacade ejbFacade;
     private List<Magasin> items = null;
+
     private Magasin selected;
     private DataModel magasins;
     
@@ -36,6 +41,7 @@ public class MagasinController implements Serializable {
     	if (items == null) {
 			magasins = new ListDataModel();
 			magasins.setWrappedData(ejbFacade.findAll());
+
 
 		}
     }
