@@ -1,6 +1,7 @@
 package com.wide.control;
 
 
+import java.io.IOException;
 import java.io.Serializable;
 import java.util.List;
 import java.util.ResourceBundle;
@@ -10,12 +11,15 @@ import java.util.logging.Logger;
 import javax.ejb.EJBException;
 import javax.enterprise.context.SessionScoped;
 import javax.faces.component.UIComponent;
+import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import javax.faces.convert.FacesConverter;
 import javax.faces.model.DataModel;
 import javax.faces.model.ListDataModel;
 import javax.inject.Named;
+
+import org.primefaces.context.RequestContext;
 
 import com.wide.dao.CommandeFacade;
 import com.wide.dao.FamilleFacade;
@@ -92,6 +96,20 @@ public class CommandeController implements Serializable {
         return items;
     }
 
+
+    public void  affiche() {
+      
+      	ExternalContext context1 = FacesContext.getCurrentInstance()
+				.getExternalContext();
+      	try {
+			context1.redirect("../commande/viewProduits.xhtml");
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+    }
+
+    
     private void persist(PersistAction persistAction, String successMessage) {
         if (selected != null) {
             setEmbeddableKeys();
