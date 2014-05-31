@@ -190,7 +190,7 @@ public class Produit implements Serializable {
 
     @Override
     public String toString() {
-        return "tn.fitness.gda.Produit[ refProd=" + refProd + " ]";
+        return nomProduit+"";
     }
     
 }

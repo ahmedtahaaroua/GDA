@@ -6,7 +6,7 @@
       xmlns:f="http://xmlns.jcp.org/jsf/core"
       xmlns:p="http://primefaces.org/ui">
 
-    <ui:composition template="/template.xhtml">
+     <ui:composition template="../templateDepot/template.xhtml">
 
 
         <ui:define name="title">
@@ -65,10 +65,58 @@
                             <p:commandButton id="editButton"   icon="ui-icon-pencil" value="#{bundle.Edit}" update=":CommandeEditForm" oncomplete="PF('CommandeEditDialog').show()" disabled="#{empty commandeController.selected}"/>
                             <p:commandButton id="deleteButton" icon="ui-icon-trash"  value="#{bundle.Delete}" actionListener="#{commandeController.destroy}" update=":growl,datalist" disabled="#{empty commandeController.selected}"/>
                         </f:facet>
+                   
+                    </p:dataTable>
+               
+                </p:panel>
+                
+                
+                
+                
+                
+                
+                
+                
+                </h:form>
+            <h:form id="LigneCommandeListForm">
+                <p:panel header="#{bundle.ListLigneCommandeTitle}">
+                    <p:dataTable id="datalist" value="#{ligneCommandeController.items}" var="item"
+                                 selectionMode="single" selection="#{ligneCommandeController.selected}"
+                                 paginator="true"
+                                 rowKey="#{item.idligneCmd}"
+                                 rows="10"
+                                 rowsPerPageTemplate="10,20,30,40,50"
+                                 >
+
+                   
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListLigneCommandeTitle_idligneCmd}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.idligneCmd}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListLigneCommandeTitle_qteCom}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.qteCom}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListLigneCommandeTitle_refProd}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.refProd}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListLigneCommandeTitle_idCommande}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.idCommande}"/>
+                        </p:column>
+                     
                     </p:dataTable>
                 </p:panel>
             </h:form>
-
             <ui:include src="Create.xhtml"/>
             <ui:include src="Edit.xhtml"/>
             <ui:include src="View.xhtml"/>

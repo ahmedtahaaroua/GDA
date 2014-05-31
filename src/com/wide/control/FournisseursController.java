@@ -12,8 +12,11 @@ import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import javax.faces.convert.FacesConverter;
+import javax.faces.model.DataModel;
+import javax.faces.model.ListDataModel;
 import javax.inject.Named;
 
+import com.wide.dao.FamilleFacade;
 import com.wide.dao.FournisseursFacade;
 import com.wide.jpaUtil.JsfUtil;
 import com.wide.jpaUtil.JsfUtil.PersistAction;
@@ -26,8 +29,14 @@ public class FournisseursController implements Serializable {
     private FournisseursFacade ejbFacade;
     private List<Fournisseurs> items= new ArrayList<Fournisseurs>() ;
     private Fournisseurs selected;
-
+    private DataModel fourniseurs;
     public FournisseursController() {
+    	ejbFacade=new FournisseursFacade();
+    	if (items == null) {
+    		fourniseurs = new ListDataModel();
+    		fourniseurs.setWrappedData(ejbFacade.findAll());
+
+		}
     }
 
     public Fournisseurs getSelected() {
@@ -59,6 +68,7 @@ public class FournisseursController implements Serializable {
         if (!JsfUtil.isValidationFailed()) {
             items = null;    // Invalidate list of items to trigger re-query.
         }
+        fourniseurs.setWrappedData(ejbFacade.findAll());
     }
 
     public void update() {

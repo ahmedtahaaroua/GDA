@@ -27,7 +27,13 @@ import com.wide.model.Utilisateur;
 public class LoginBean implements Serializable {
 
    
-    private Utilisateur selectedClient =null;
+    public UtilisateurCtrl getUtilCtrl() {
+		return utilCtrl;
+	}
+	public void setUtilCtrl(UtilisateurCtrl utilCtrl) {
+		this.utilCtrl = utilCtrl;
+	}
+	private Utilisateur selectedClient =null;
   
     UtilisateurCtrl utilCtrl = new UtilisateurCtrl();
     private String username;

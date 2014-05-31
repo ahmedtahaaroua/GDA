@@ -14,11 +14,11 @@
 
         <ui:define name="body">
         
-       <p:selectOneMenu value="#{magasinController.selected.idMagasin}">
+       <p:selectOneMenu value="#{magasinController.items.get(0).idMagasin}">
 				<f:selectItems id="item"
 					value="#{magasinController.items}" var="c"
 					itemLabel="#{c.nomMagasin}" itemValue="#{c.idMagasin}" />
-					<p:ajax update="in_text" />  
+				 
 			</p:selectOneMenu>
         
         
