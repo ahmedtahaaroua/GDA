@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="LignelivraisonEditDlg" widgetVar="LignelivraisonEditDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.EditLignelivraisonTitle}">
+            <h:form id="LignelivraisonEditForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{lignelivraisonController.selected != null}">
+                        <p:outputLabel value="#{bundle.EditLignelivraisonLabel_idLigneLivraison}" for="idLigneLivraison" />
+                        <p:inputText id="idLigneLivraison" value="#{lignelivraisonController.selected.idLigneLivraison}" title="#{bundle.EditLignelivraisonTitle_idLigneLivraison}" required="true" requiredMessage="#{bundle.EditLignelivraisonRequiredMessage_idLigneLivraison}"/>
+                        <p:outputLabel value="#{bundle.EditLignelivraisonLabel_refProduit}" for="refProduit" />
+                        <p:inputText id="refProduit" value="#{lignelivraisonController.selected.refProduit}" title="#{bundle.EditLignelivraisonTitle_refProduit}" />
+                        <p:outputLabel value="#{bundle.EditLignelivraisonLabel_qteLiv}" for="qteLiv" />
+                        <p:inputText id="qteLiv" value="#{lignelivraisonController.selected.qteLiv}" title="#{bundle.EditLignelivraisonTitle_qteLiv}" />
+                        <p:outputLabel value="#{bundle.EditLignelivraisonLabel_idLivraison}" for="idLivraison" />
+                        <p:inputText id="idLivraison" value="#{lignelivraisonController.selected.idLivraison}" title="#{bundle.EditLignelivraisonTitle_idLivraison}" />
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{lignelivraisonController.update}" value="#{bundle.Save}" update="display,:LignelivraisonListForm:datalist,:growl" oncomplete="handleSubmit(args, 'LignelivraisonEditDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="LignelivraisonEditDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

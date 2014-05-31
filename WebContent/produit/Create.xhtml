@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="ProduitCreateDlg" widgetVar="ProduitCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.CreateProduitTitle}">
+            <h:form id="ProduitCreateForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{produitController.selected != null}">
+                        <p:outputLabel value="#{bundle.CreateProduitLabel_refProd}" for="refProd" />
+                        <p:inputText id="refProd" value="#{produitController.selected.refProd}" title="#{bundle.CreateProduitTitle_refProd}" required="true" requiredMessage="#{bundle.CreateProduitRequiredMessage_refProd}"/>
+                        <p:outputLabel value="#{bundle.CreateProduitLabel_nomProduit}" for="nomProduit" />
+                        <p:inputText id="nomProduit" value="#{produitController.selected.nomProduit}" title="#{bundle.CreateProduitTitle_nomProduit}" />
+                        <p:outputLabel value="#{bundle.CreateProduitLabel_quantite}" for="quantite" />
+                        <p:inputText id="quantite" value="#{produitController.selected.quantite}" title="#{bundle.CreateProduitTitle_quantite}" />
+                        <p:outputLabel value="#{bundle.CreateProduitLabel_prixAchat}" for="prixAchat" />
+                        <p:inputText id="prixAchat" value="#{produitController.selected.prixAchat}" title="#{bundle.CreateProduitTitle_prixAchat}" />
+                        <p:outputLabel value="#{bundle.CreateProduitLabel_quantiteMin}" for="quantiteMin" />
+                        <p:inputText id="quantiteMin" value="#{produitController.selected.quantiteMin}" title="#{bundle.CreateProduitTitle_quantiteMin}" />
+                        <p:outputLabel value="#{bundle.CreateProduitLabel_quantiteMax}" for="quantiteMax" />
+                        <p:inputText id="quantiteMax" value="#{produitController.selected.quantiteMax}" title="#{bundle.CreateProduitTitle_quantiteMax}" />
+                        <p:outputLabel value="#{bundle.CreateProduitLabel_idFamille}" for="idFamille" />
+                        <p:selectOneMenu id="idFamille" value="#{produitController.selected.idFamille}" required="true" requiredMessage="#{bundle.EditProduitRequiredMessage_idFamille}">
+                            <f:selectItems value="#{familleController.itemsAvailableSelectOne}"
+                                           var="idFamilleItem"
+                                           itemValue="#{idFamilleItem}"/>
+                        </p:selectOneMenu>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{produitController.create}" value="#{bundle.Save}" update="display,:ProduitListForm:datalist,:growl" oncomplete="handleSubmit(args,'ProduitCreateDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="ProduitCreateDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

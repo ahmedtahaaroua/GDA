@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="UtilisateurCreateDlg" widgetVar="UtilisateurCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.CreateUtilisateurTitle}">
+            <h:form id="UtilisateurCreateForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{utilisateurController.selected != null}">
+                        <p:outputLabel value="#{bundle.CreateUtilisateurLabel_idUser}" for="idUser" />
+                        <p:inputText id="idUser" value="#{utilisateurController.selected.idUser}" title="#{bundle.CreateUtilisateurTitle_idUser}" required="true" requiredMessage="#{bundle.CreateUtilisateurRequiredMessage_idUser}"/>
+                        <p:outputLabel value="#{bundle.CreateUtilisateurLabel_nom}" for="nom" />
+                        <p:inputText id="nom" value="#{utilisateurController.selected.nom}" title="#{bundle.CreateUtilisateurTitle_nom}" />
+                        <p:outputLabel value="#{bundle.CreateUtilisateurLabel_prenom}" for="prenom" />
+                        <p:inputText id="prenom" value="#{utilisateurController.selected.prenom}" title="#{bundle.CreateUtilisateurTitle_prenom}" />
+                        <p:outputLabel value="#{bundle.CreateUtilisateurLabel_dateNaissance}" for="dateNaissance" />
+                        <p:calendar id="dateNaissance" pattern="MM/dd/yyyy HH:mm:ss" value="#{utilisateurController.selected.dateNaissance}" title="#{bundle.EditUtilisateurTitle_dateNaissance}"  showOn="button"/>
+                        <p:outputLabel value="#{bundle.CreateUtilisateurLabel_adresse}" for="adresse" />
+                        <p:inputText id="adresse" value="#{utilisateurController.selected.adresse}" title="#{bundle.CreateUtilisateurTitle_adresse}" />
+                        <p:outputLabel value="#{bundle.CreateUtilisateurLabel_tel}" for="tel" />
+                        <p:inputText id="tel" value="#{utilisateurController.selected.tel}" title="#{bundle.CreateUtilisateurTitle_tel}" />
+                        <p:outputLabel value="#{bundle.CreateUtilisateurLabel_civilite}" for="civilite" />
+                        <p:inputText id="civilite" value="#{utilisateurController.selected.civilite}" title="#{bundle.CreateUtilisateurTitle_civilite}" />
+                        <p:outputLabel value="#{bundle.CreateUtilisateurLabel_situationFamiliale}" for="situationFamiliale" />
+                        <p:inputText id="situationFamiliale" value="#{utilisateurController.selected.situationFamiliale}" title="#{bundle.CreateUtilisateurTitle_situationFamiliale}" />
+                        <p:outputLabel value="#{bundle.CreateUtilisateurLabel_login}" for="login" />
+                        <p:inputText id="login" value="#{utilisateurController.selected.login}" title="#{bundle.CreateUtilisateurTitle_login}" />
+                        <p:outputLabel value="#{bundle.CreateUtilisateurLabel_motPasse}" for="motPasse" />
+                        <p:inputText id="motPasse" value="#{utilisateurController.selected.motPasse}" title="#{bundle.CreateUtilisateurTitle_motPasse}" />
+                        <p:outputLabel value="#{bundle.CreateUtilisateurLabel_type}" for="type" />
+                        <p:inputText id="type" value="#{utilisateurController.selected.type}" title="#{bundle.CreateUtilisateurTitle_type}" />
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{utilisateurController.create}" value="#{bundle.Save}" update="display,:UtilisateurListForm:datalist,:growl" oncomplete="handleSubmit(args,'UtilisateurCreateDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="UtilisateurCreateDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

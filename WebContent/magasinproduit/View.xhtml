@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="MagasinproduitViewDlg" widgetVar="MagasinproduitViewDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.ViewMagasinproduitTitle}">
+            <h:form id="MagasinproduitViewForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{magasinproduitController.selected != null}">
+                        <h:outputText value="#{bundle.ViewMagasinproduitLabel_idMagasinProd}"/>
+                        <h:outputText value="#{magasinproduitController.selected.idMagasinProd}" title="#{bundle.ViewMagasinproduitTitle_idMagasinProd}"/>
+                        <h:outputText value="#{bundle.ViewMagasinproduitLabel_qte}"/>
+                        <h:outputText value="#{magasinproduitController.selected.qte}" title="#{bundle.ViewMagasinproduitTitle_qte}"/>
+                        <h:outputText value="#{bundle.ViewMagasinproduitLabel_idMagasin}"/>
+                        <h:outputText value="#{magasinproduitController.selected.idMagasin}" title="#{bundle.ViewMagasinproduitTitle_idMagasin}"/>
+                        <h:outputText value="#{bundle.ViewMagasinproduitLabel_refProd}"/>
+                        <h:outputText value="#{magasinproduitController.selected.refProd}" title="#{bundle.ViewMagasinproduitTitle_refProd}"/>
+                    </p:panelGrid>
+                    <p:commandButton value="#{bundle.Close}" onclick="MagasinproduitViewDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

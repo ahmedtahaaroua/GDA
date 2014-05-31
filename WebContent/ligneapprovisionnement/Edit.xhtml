@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="LigneapprovisionnementEditDlg" widgetVar="LigneapprovisionnementEditDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.EditLigneapprovisionnementTitle}">
+            <h:form id="LigneapprovisionnementEditForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{ligneapprovisionnementController.selected != null}">
+                        <p:outputLabel value="#{bundle.EditLigneapprovisionnementLabel_idApprMagasin}" for="idApprMagasin" />
+                        <p:inputText id="idApprMagasin" value="#{ligneapprovisionnementController.selected.idApprMagasin}" title="#{bundle.EditLigneapprovisionnementTitle_idApprMagasin}" required="true" requiredMessage="#{bundle.EditLigneapprovisionnementRequiredMessage_idApprMagasin}"/>
+                        <p:outputLabel value="#{bundle.EditLigneapprovisionnementLabel_qteApp}" for="qteApp" />
+                        <p:inputText id="qteApp" value="#{ligneapprovisionnementController.selected.qteApp}" title="#{bundle.EditLigneapprovisionnementTitle_qteApp}" />
+                        <p:outputLabel value="#{bundle.EditLigneapprovisionnementLabel_idApprovisionnement}" for="idApprovisionnement" />
+                        <p:selectOneMenu id="idApprovisionnement" value="#{ligneapprovisionnementController.selected.idApprovisionnement}" >
+                            <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
+                            <f:selectItems value="#{approvisionemmentController.itemsAvailableSelectOne}"
+                                           var="idApprovisionnementItem"
+                                           itemValue="#{idApprovisionnementItem}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.EditLigneapprovisionnementLabel_refProd}" for="refProd" />
+                        <p:selectOneMenu id="refProd" value="#{ligneapprovisionnementController.selected.refProd}" required="true" requiredMessage="#{bundle.EditLigneapprovisionnementRequiredMessage_refProd}">
+                            <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
+                            <f:selectItems value="#{produitController.itemsAvailableSelectOne}"
+                                           var="refProdItem"
+                                           itemValue="#{refProdItem}"/>
+                        </p:selectOneMenu>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{ligneapprovisionnementController.update}" value="#{bundle.Save}" update="display,:LigneapprovisionnementListForm:datalist,:growl" oncomplete="handleSubmit(args, 'LigneapprovisionnementEditDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="LigneapprovisionnementEditDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

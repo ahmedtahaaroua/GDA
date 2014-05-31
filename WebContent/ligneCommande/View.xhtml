@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="LigneCommandeViewDlg" widgetVar="LigneCommandeViewDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.ViewLigneCommandeTitle}">
+            <h:form id="LigneCommandeViewForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{ligneCommandeController.selected != null}">
+                        <h:outputText value="#{bundle.ViewLigneCommandeLabel_idligneCmd}"/>
+                        <h:outputText value="#{ligneCommandeController.selected.idligneCmd}" title="#{bundle.ViewLigneCommandeTitle_idligneCmd}"/>
+                        <h:outputText value="#{bundle.ViewLigneCommandeLabel_qteCom}"/>
+                        <h:outputText value="#{ligneCommandeController.selected.qteCom}" title="#{bundle.ViewLigneCommandeTitle_qteCom}"/>
+                        <h:outputText value="#{bundle.ViewLigneCommandeLabel_refProd}"/>
+                        <h:outputText value="#{ligneCommandeController.selected.refProd}" title="#{bundle.ViewLigneCommandeTitle_refProd}"/>
+                        <h:outputText value="#{bundle.ViewLigneCommandeLabel_idCommande}"/>
+                        <h:outputText value="#{ligneCommandeController.selected.idCommande}" title="#{bundle.ViewLigneCommandeTitle_idCommande}"/>
+                    </p:panelGrid>
+                    <p:commandButton value="#{bundle.Close}" onclick="LigneCommandeViewDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

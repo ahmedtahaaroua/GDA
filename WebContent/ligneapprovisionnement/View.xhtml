@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="LigneapprovisionnementViewDlg" widgetVar="LigneapprovisionnementViewDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.ViewLigneapprovisionnementTitle}">
+            <h:form id="LigneapprovisionnementViewForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{ligneapprovisionnementController.selected != null}">
+                        <h:outputText value="#{bundle.ViewLigneapprovisionnementLabel_idApprMagasin}"/>
+                        <h:outputText value="#{ligneapprovisionnementController.selected.idApprMagasin}" title="#{bundle.ViewLigneapprovisionnementTitle_idApprMagasin}"/>
+                        <h:outputText value="#{bundle.ViewLigneapprovisionnementLabel_qteApp}"/>
+                        <h:outputText value="#{ligneapprovisionnementController.selected.qteApp}" title="#{bundle.ViewLigneapprovisionnementTitle_qteApp}"/>
+                        <h:outputText value="#{bundle.ViewLigneapprovisionnementLabel_idApprovisionnement}"/>
+                        <h:outputText value="#{ligneapprovisionnementController.selected.idApprovisionnement}" title="#{bundle.ViewLigneapprovisionnementTitle_idApprovisionnement}"/>
+                        <h:outputText value="#{bundle.ViewLigneapprovisionnementLabel_refProd}"/>
+                        <h:outputText value="#{ligneapprovisionnementController.selected.refProd}" title="#{bundle.ViewLigneapprovisionnementTitle_refProd}"/>
+                    </p:panelGrid>
+                    <p:commandButton value="#{bundle.Close}" onclick="LigneapprovisionnementViewDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="LigneTransfertCreateDlg" widgetVar="LigneTransfertCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.CreateLigneTransfertTitle}">
+            <h:form id="LigneTransfertCreateForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{ligneTransfertController.selected != null}">
+                        <p:outputLabel value="#{bundle.CreateLigneTransfertLabel_idLigneTransfert}" for="idLigneTransfert" />
+                        <p:inputText id="idLigneTransfert" value="#{ligneTransfertController.selected.idLigneTransfert}" title="#{bundle.CreateLigneTransfertTitle_idLigneTransfert}" required="true" requiredMessage="#{bundle.CreateLigneTransfertRequiredMessage_idLigneTransfert}"/>
+                        <p:outputLabel value="#{bundle.CreateLigneTransfertLabel_qteTran}" for="qteTran" />
+                        <p:inputText id="qteTran" value="#{ligneTransfertController.selected.qteTran}" title="#{bundle.CreateLigneTransfertTitle_qteTran}" />
+                        <p:outputLabel value="#{bundle.CreateLigneTransfertLabel_idTransfert}" for="idTransfert" />
+                        <p:selectOneMenu id="idTransfert" value="#{ligneTransfertController.selected.idTransfert}" required="true" requiredMessage="#{bundle.EditLigneTransfertRequiredMessage_idTransfert}">
+                            <f:selectItems value="#{transfertController.itemsAvailableSelectOne}"
+                                           var="idTransfertItem"
+                                           itemValue="#{idTransfertItem}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.CreateLigneTransfertLabel_refProd}" for="refProd" />
+                        <p:selectOneMenu id="refProd" value="#{ligneTransfertController.selected.refProd}" required="true" requiredMessage="#{bundle.EditLigneTransfertRequiredMessage_refProd}">
+                            <f:selectItems value="#{produitController.itemsAvailableSelectOne}"
+                                           var="refProdItem"
+                                           itemValue="#{refProdItem}"/>
+                        </p:selectOneMenu>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{ligneTransfertController.create}" value="#{bundle.Save}" update="display,:LigneTransfertListForm:datalist,:growl" oncomplete="handleSubmit(args,'LigneTransfertCreateDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="LigneTransfertCreateDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="LivraisonmagasinCreateDlg" widgetVar="LivraisonmagasinCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.CreateLivraisonmagasinTitle}">
+            <h:form id="LivraisonmagasinCreateForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{livraisonmagasinController.selected != null}">
+                        <p:outputLabel value="#{bundle.CreateLivraisonmagasinLabel_idLivraisonMagasin}" for="idLivraisonMagasin" />
+                        <p:inputText id="idLivraisonMagasin" value="#{livraisonmagasinController.selected.idLivraisonMagasin}" title="#{bundle.CreateLivraisonmagasinTitle_idLivraisonMagasin}" required="true" requiredMessage="#{bundle.CreateLivraisonmagasinRequiredMessage_idLivraisonMagasin}"/>
+                        <p:outputLabel value="#{bundle.CreateLivraisonmagasinLabel_dateLivraison}" for="dateLivraison" />
+                        <p:calendar id="dateLivraison" pattern="MM/dd/yyyy HH:mm:ss" value="#{livraisonmagasinController.selected.dateLivraison}" title="#{bundle.EditLivraisonmagasinTitle_dateLivraison}"  showOn="button"/>
+                        <p:outputLabel value="#{bundle.CreateLivraisonmagasinLabel_idMagasin}" for="idMagasin" />
+                        <p:selectOneMenu id="idMagasin" value="#{livraisonmagasinController.selected.idMagasin}" >
+                            <f:selectItems value="#{magasinController.itemsAvailableSelectOne}"
+                                           var="idMagasinItem"
+                                           itemValue="#{idMagasinItem}"/>
+                        </p:selectOneMenu>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{livraisonmagasinController.create}" value="#{bundle.Save}" update="display,:LivraisonmagasinListForm:datalist,:growl" oncomplete="handleSubmit(args,'LivraisonmagasinCreateDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="LivraisonmagasinCreateDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

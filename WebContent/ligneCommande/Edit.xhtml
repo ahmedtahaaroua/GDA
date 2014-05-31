@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="LigneCommandeEditDlg" widgetVar="LigneCommandeEditDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.EditLigneCommandeTitle}">
+            <h:form id="LigneCommandeEditForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{ligneCommandeController.selected != null}">
+                        <p:outputLabel value="#{bundle.EditLigneCommandeLabel_idligneCmd}" for="idligneCmd" />
+                        <p:inputText id="idligneCmd" value="#{ligneCommandeController.selected.idligneCmd}" title="#{bundle.EditLigneCommandeTitle_idligneCmd}" required="true" requiredMessage="#{bundle.EditLigneCommandeRequiredMessage_idligneCmd}"/>
+                        <p:outputLabel value="#{bundle.EditLigneCommandeLabel_qteCom}" for="qteCom" />
+                        <p:inputText id="qteCom" value="#{ligneCommandeController.selected.qteCom}" title="#{bundle.EditLigneCommandeTitle_qteCom}" />
+                        <p:outputLabel value="#{bundle.EditLigneCommandeLabel_refProd}" for="refProd" />
+                        <p:selectOneMenu id="refProd" value="#{ligneCommandeController.selected.refProd}" required="true" requiredMessage="#{bundle.EditLigneCommandeRequiredMessage_refProd}">
+                            <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
+                            <f:selectItems value="#{produitController.itemsAvailableSelectOne}"
+                                           var="refProdItem"
+                                           itemValue="#{refProdItem}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.EditLigneCommandeLabel_idCommande}" for="idCommande" />
+                        <p:selectOneMenu id="idCommande" value="#{ligneCommandeController.selected.idCommande}" required="true" requiredMessage="#{bundle.EditLigneCommandeRequiredMessage_idCommande}">
+                            <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
+                            <f:selectItems value="#{commandeController.itemsAvailableSelectOne}"
+                                           var="idCommandeItem"
+                                           itemValue="#{idCommandeItem}"/>
+                        </p:selectOneMenu>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{ligneCommandeController.update}" value="#{bundle.Save}" update="display,:LigneCommandeListForm:datalist,:growl" oncomplete="handleSubmit(args, 'LigneCommandeEditDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="LigneCommandeEditDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

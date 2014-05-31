@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="LignelivraisonmagasinEditDlg" widgetVar="LignelivraisonmagasinEditDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.EditLignelivraisonmagasinTitle}">
+            <h:form id="LignelivraisonmagasinEditForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{lignelivraisonmagasinController.selected != null}">
+                        <p:outputLabel value="#{bundle.EditLignelivraisonmagasinLabel_idLigLivMag}" for="idLigLivMag" />
+                        <p:inputText id="idLigLivMag" value="#{lignelivraisonmagasinController.selected.idLigLivMag}" title="#{bundle.EditLignelivraisonmagasinTitle_idLigLivMag}" required="true" requiredMessage="#{bundle.EditLignelivraisonmagasinRequiredMessage_idLigLivMag}"/>
+                        <p:outputLabel value="#{bundle.EditLignelivraisonmagasinLabel_qteLiv}" for="qteLiv" />
+                        <p:inputText id="qteLiv" value="#{lignelivraisonmagasinController.selected.qteLiv}" title="#{bundle.EditLignelivraisonmagasinTitle_qteLiv}" />
+                        <p:outputLabel value="#{bundle.EditLignelivraisonmagasinLabel_refProduit}" for="refProduit" />
+                        <p:selectOneMenu id="refProduit" value="#{lignelivraisonmagasinController.selected.refProduit}" >
+                            <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
+                            <f:selectItems value="#{lotController.itemsAvailableSelectOne}"
+                                           var="refProduitItem"
+                                           itemValue="#{refProduitItem}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.EditLignelivraisonmagasinLabel_idLivraisonMagasin}" for="idLivraisonMagasin" />
+                        <p:selectOneMenu id="idLivraisonMagasin" value="#{lignelivraisonmagasinController.selected.idLivraisonMagasin}" >
+                            <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
+                            <f:selectItems value="#{livraisonmagasinController.itemsAvailableSelectOne}"
+                                           var="idLivraisonMagasinItem"
+                                           itemValue="#{idLivraisonMagasinItem}"/>
+                        </p:selectOneMenu>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{lignelivraisonmagasinController.update}" value="#{bundle.Save}" update="display,:LignelivraisonmagasinListForm:datalist,:growl" oncomplete="handleSubmit(args, 'LignelivraisonmagasinEditDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="LignelivraisonmagasinEditDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

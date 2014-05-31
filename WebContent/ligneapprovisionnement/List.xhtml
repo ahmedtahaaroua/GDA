@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition template="/template.xhtml">
+
+
+        <ui:define name="title">
+            <h:outputText value="#{bundle.ListLigneapprovisionnementTitle}"></h:outputText>
+        </ui:define>
+
+        <ui:define name="body">
+            <h:form id="LigneapprovisionnementListForm">
+                <p:panel header="#{bundle.ListLigneapprovisionnementTitle}">
+                    <p:dataTable id="datalist" value="#{ligneapprovisionnementController.items}" var="item"
+                                 selectionMode="single" selection="#{ligneapprovisionnementController.selected}"
+                                 paginator="true"
+                                 rowKey="#{item.idApprMagasin}"
+                                 rows="10"
+                                 rowsPerPageTemplate="10,20,30,40,50"
+                                 >
+
+                        <p:ajax event="rowSelect"   update="createButton viewButton editButton deleteButton"/>
+                        <p:ajax event="rowUnselect" update="createButton viewButton editButton deleteButton"/>
+
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListLigneapprovisionnementTitle_idApprMagasin}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.idApprMagasin}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListLigneapprovisionnementTitle_qteApp}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.qteApp}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListLigneapprovisionnementTitle_idApprovisionnement}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.idApprovisionnement}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListLigneapprovisionnementTitle_refProd}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.refProd}"/>
+                        </p:column>
+                        <f:facet name="footer">
+                            <p:commandButton id="createButton" icon="ui-icon-plus"   value="#{bundle.Create}" actionListener="#{ligneapprovisionnementController.prepareCreate}" update=":LigneapprovisionnementCreateForm" oncomplete="PF('LigneapprovisionnementCreateDialog').show()"/>
+                            <p:commandButton id="viewButton"   icon="ui-icon-search" value="#{bundle.View}" update=":LigneapprovisionnementViewForm" oncomplete="PF('LigneapprovisionnementViewDialog').show()" disabled="#{empty ligneapprovisionnementController.selected}"/>
+                            <p:commandButton id="editButton"   icon="ui-icon-pencil" value="#{bundle.Edit}" update=":LigneapprovisionnementEditForm" oncomplete="PF('LigneapprovisionnementEditDialog').show()" disabled="#{empty ligneapprovisionnementController.selected}"/>
+                            <p:commandButton id="deleteButton" icon="ui-icon-trash"  value="#{bundle.Delete}" actionListener="#{ligneapprovisionnementController.destroy}" update=":growl,datalist" disabled="#{empty ligneapprovisionnementController.selected}"/>
+                        </f:facet>
+                    </p:dataTable>
+                </p:panel>
+            </h:form>
+
+            <ui:include src="Create.xhtml"/>
+            <ui:include src="Edit.xhtml"/>
+            <ui:include src="View.xhtml"/>
+        </ui:define>
+    </ui:composition>
+
+</html>

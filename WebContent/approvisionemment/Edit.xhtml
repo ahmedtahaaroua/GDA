@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="ApprovisionemmentEditDlg" widgetVar="ApprovisionemmentEditDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.EditApprovisionemmentTitle}">
+            <h:form id="ApprovisionemmentEditForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{approvisionemmentController.selected != null}">
+                        <p:outputLabel value="#{bundle.EditApprovisionemmentLabel_idApprovisionnement}" for="idApprovisionnement" />
+                        <p:inputText id="idApprovisionnement" value="#{approvisionemmentController.selected.idApprovisionnement}" title="#{bundle.EditApprovisionemmentTitle_idApprovisionnement}" required="true" requiredMessage="#{bundle.EditApprovisionemmentRequiredMessage_idApprovisionnement}"/>
+                        <p:outputLabel value="#{bundle.EditApprovisionemmentLabel_dateCreation}" for="dateCreation" />
+                        <p:calendar id="dateCreation" pattern="MM/dd/yyyy HH:mm:ss" value="#{approvisionemmentController.selected.dateCreation}" title="#{bundle.EditApprovisionemmentTitle_dateCreation}"  showOn="button"/>
+                        <p:outputLabel value="#{bundle.EditApprovisionemmentLabel_validee}" for="validee" />
+                        <p:selectBooleanCheckbox id="validee" value="#{approvisionemmentController.selected.validee}" />
+                        <p:outputLabel value="#{bundle.EditApprovisionemmentLabel_idMagasin}" for="idMagasin" />
+                        <p:selectOneMenu id="idMagasin" value="#{approvisionemmentController.selected.idMagasin}" >
+                            <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
+                            <f:selectItems value="#{magasinController.itemsAvailableSelectOne}"
+                                           var="idMagasinItem"
+                                           itemValue="#{idMagasinItem}"/>
+                        </p:selectOneMenu>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{approvisionemmentController.update}" value="#{bundle.Save}" update="display,:ApprovisionemmentListForm:datalist,:growl" oncomplete="handleSubmit(args, 'ApprovisionemmentEditDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="ApprovisionemmentEditDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>
