@@ -1,8 +1,33 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <persistence version="2.1" xmlns="http://xmlns.jcp.org/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd">
-  <persistence-unit name="tn.fitness_GDA_war_1.0-SNAPSHOTPU" transaction-type="JTA">
-    <jta-data-source>jdbc/GDA</jta-data-source>
-    <exclude-unlisted-classes>false</exclude-unlisted-classes>
-    <properties/>
+  <persistence-unit name="GDA" transaction-type="RESOURCE_LOCAL">
+     <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
+		<class>com.wide.model.Utilisateur</class>
+		<class>com.wide.model.Magasin</class>
+		<class>com.wide.model.Approvisionemment</class>
+		<class>com.wide.model.Commande</class>
+		<class>com.wide.model.Famille</class>
+		<class>com.wide.model.Fournisseurs</class>
+		<class>com.wide.model.Ligneapprovisionnement</class>
+		<class>com.wide.model.LigneCommande</class>
+		<class>com.wide.model.Lignelivraison</class>
+		<class>com.wide.model.Lignelivraisonmagasin</class>
+		<class>com.wide.model.LigneTransfert</class>
+		<class>com.wide.model.Livraisonmagasin</class>
+		<class>com.wide.model.Lot</class>
+		<class>com.wide.model.Magasinproduit</class>
+		<class>com.wide.model.Produit</class>
+		<class>com.wide.model.Transfert</class>
+		<properties>
+			<property name="eclipselink.target-server" value="None"/>
+			<property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver"/>
+			<property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/gda"/>
+			<property name="javax.persistence.jdbc.user" value="root"/>
+			<property name="javax.persistence.jdbc.password" value="root"/>
+			<property name="eclipselink.logging.level" value="FINEST"/>
+		</properties>
+<!--     <jta-data-source>jdbc/GDA</jta-data-source> -->
+<!--     <exclude-unlisted-classes>false</exclude-unlisted-classes> -->
+<!--     <properties/> -->
   </persistence-unit>
 </persistence>

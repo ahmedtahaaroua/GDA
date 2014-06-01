@@ -1,0 +1,57 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
+
+    <h:head>
+        <title><ui:insert name="title">Default Title</ui:insert></title>
+        <h:outputStylesheet library="css" name="jsfcrud.css"/>
+        <h:outputScript library="js" name="jsfcrud.js"/>
+    </h:head>
+
+    <h:body>
+
+        <p:growl id="growl" life="3000" />
+
+        <p:layout fullPage="true">
+            <p:layoutUnit position="north" size="65" header="#{bundle.AppName}">
+                <h:form id="menuForm">
+                    <p:menubar>
+                        <p:menuitem value="#{bundle.Home}" outcome="/index" icon="ui-icon-home"/>
+                        <p:submenu label="#{bundle.Maintenance}">
+                            <p:menuitem value="Approvisionemment" outcome="/approvisionemment/List.xhtml" />
+                            <p:menuitem value="Commande" outcome="/commande/List.xhtml" />
+                            <p:menuitem value="Famille" outcome="/famille/List.xhtml" />
+                            <p:menuitem value="Fournisseurs" outcome="/fournisseurs/List.xhtml" />
+                            <p:menuitem value="LigneCommande" outcome="/ligneCommande/List.xhtml" />
+                            <p:menuitem value="LigneTransfert" outcome="/ligneTransfert/List.xhtml" />
+                            <p:menuitem value="Ligneapprovisionnement" outcome="/ligneapprovisionnement/List.xhtml" />
+                            <p:menuitem value="Lignelivraison" outcome="/lignelivraison/List.xhtml" />
+                            <p:menuitem value="Lignelivraisonmagasin" outcome="/lignelivraisonmagasin/List.xhtml" />
+                            <p:menuitem value="Livraisonmagasin" outcome="/livraisonmagasin/List.xhtml" />
+                            <p:menuitem value="Lot" outcome="/lot/List.xhtml" />
+                            <p:menuitem value="Magasin" outcome="/magasin/List.xhtml" />
+                            <p:menuitem value="Magasinproduit" outcome="/magasinproduit/List.xhtml" />
+                            <p:menuitem value="Produit" outcome="/produit/List.xhtml" />
+                            <p:menuitem value="Transfert" outcome="/transfert/List.xhtml" />
+                            <p:menuitem value="Utilisateur" outcome="/utilisateur/List.xhtml" />
+                        </p:submenu>
+                    </p:menubar>
+                </h:form>
+            </p:layoutUnit>
+
+            <p:layoutUnit position="south" size="60">
+                <ui:insert name="footer"/>
+            </p:layoutUnit>
+
+            <p:layoutUnit position="center">
+                <ui:insert name="body"/>
+            </p:layoutUnit>
+
+        </p:layout>
+
+    </h:body>
+
+</html>

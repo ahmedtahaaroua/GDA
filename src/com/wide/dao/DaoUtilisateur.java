@@ -11,7 +11,7 @@ import javax.persistence.Query;
 import com.wide.model.Utilisateur;
 
 public class DaoUtilisateur {
-	private static final String JPA_UNIT_NAME = "GDA";
+	private static final String JPA_UNIT_NAME = "tn.fitness_GDA_war_1.0-SNAPSHOTPU";
 	private EntityManager entityManager;
 
 	protected EntityManager getEntityManager() {

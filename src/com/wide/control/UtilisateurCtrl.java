@@ -12,7 +12,7 @@ import javax.faces.model.ListDataModel;
 import javax.faces.model.SelectItem;
 
 import com.wide.dao.DaoMagasin;
-import com.wide.dao.DaoUtilisateur;
+import com.wide.dao.UtilisateurFacade;
 import com.wide.model.Magasin;
 import com.wide.model.Utilisateur;
 
@@ -23,15 +23,15 @@ public class UtilisateurCtrl implements Serializable {
 	private Utilisateur utilisateur = new Utilisateur();
 	Utilisateur editUtilisateur;
 	private List<SelectItem> UtilisateurItems;
-	private DaoUtilisateur DaoU;
+	private UtilisateurFacade DaoU;
 	private DataModel utilisateurs;
 	private List<Magasin> magasins;
 
 	public UtilisateurCtrl() {
-		DaoU = new DaoUtilisateur();
+		DaoU = new UtilisateurFacade();
 		if (utilisateurs == null) {
 			utilisateurs = new ListDataModel();
-			utilisateurs.setWrappedData(DaoU.selectAll());
+			utilisateurs.setWrappedData(DaoU.findAll());
 
 		}
 
@@ -43,16 +43,16 @@ public class UtilisateurCtrl implements Serializable {
 	}
 
 	public String ajouter() {
-		DaoU.ajouter(utilisateur);
-		utilisateurs.setWrappedData(DaoU.selectAll());
+		DaoU.create(utilisateur);
+		utilisateurs.setWrappedData(DaoU.findAll());
 		FacesMessage msg = new FacesMessage("Ajout  effectué avec succés");
 		FacesContext.getCurrentInstance().addMessage(null, msg);
 		return "list";
 	}
 
 	public String modifier() {
-		DaoU.modifier(editUtilisateur);
-		utilisateurs.setWrappedData(DaoU.selectAll());
+		DaoU.edit(editUtilisateur);
+		utilisateurs.setWrappedData(DaoU.findAll());
 		FacesMessage msg = new FacesMessage(
 				"Modification  effectué avec succés");
 		FacesContext.getCurrentInstance().addMessage(null, msg);
@@ -62,8 +62,8 @@ public class UtilisateurCtrl implements Serializable {
 
 	public String supprimer() {
 		Utilisateur u = (Utilisateur) utilisateurs.getRowData();
-		DaoU.supprimer(u);
-		utilisateurs.setWrappedData(DaoU.selectAll());
+		DaoU.remove(u);
+		utilisateurs.setWrappedData(DaoU.findAll());
 		FacesMessage msg = new FacesMessage("suppression  effectué avec succés");
 		FacesContext.getCurrentInstance().addMessage(null, msg);
 		return "list";
@@ -98,11 +98,11 @@ public class UtilisateurCtrl implements Serializable {
 		UtilisateurItems = utilisateurItems;
 	}
 
-	public DaoUtilisateur getDaoU() {
+	public UtilisateurFacade getDaoU() {
 		return DaoU;
 	}
 
-	public void setDaoU(DaoUtilisateur daoU) {
+	public void setDaoU(UtilisateurFacade daoU) {
 		DaoU = daoU;
 	}
 
@@ -115,7 +115,7 @@ public class UtilisateurCtrl implements Serializable {
 	}
 
 	public List<Utilisateur> getutils() {
-		return DaoU.selectAll();
+		return DaoU.findAll();
 	}
 
 	public List<Magasin> getMagasins() {

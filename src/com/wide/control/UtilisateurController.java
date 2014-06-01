@@ -5,29 +5,42 @@ import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import javax.ejb.EJB;
 import javax.ejb.EJBException;
 import javax.enterprise.context.SessionScoped;
+import javax.faces.application.FacesMessage;
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import javax.faces.convert.FacesConverter;
+import javax.faces.model.DataModel;
+import javax.faces.model.ListDataModel;
+import javax.faces.model.SelectItem;
 import javax.inject.Named;
 
 import com.wide.dao.UtilisateurFacade;
 import com.wide.jpaUtil.JsfUtil;
 import com.wide.jpaUtil.JsfUtil.PersistAction;
+import com.wide.model.Magasin;
 import com.wide.model.Utilisateur;
 
 @Named("utilisateurController")
 @SessionScoped
 public class UtilisateurController implements Serializable {
 
+	
     private UtilisateurFacade ejbFacade;
     private List<Utilisateur> items = null;
-    private Utilisateur selected;
-
+    private Utilisateur selected=new Utilisateur();
+	private DataModel utilisateurs;
+	private List<SelectItem> UtilisateurItems;
+	private List<Magasin> magasins;
     public UtilisateurController() {
+    	ejbFacade=new UtilisateurFacade();
+    	if (items == null) {
+			utilisateurs = new ListDataModel();
+			utilisateurs.setWrappedData(ejbFacade.findAll());
+
+		}
     }
 
     public Utilisateur getSelected() {
@@ -55,10 +68,17 @@ public class UtilisateurController implements Serializable {
     }
 
     public void create() {
+    	
+//    	ejbFacade.create(selected);
+//		
+//		FacesMessage msg = new FacesMessage("Ajout  effectué avec succés");
+//		FacesContext.getCurrentInstance().addMessage(null, msg);
+    	
         persist(PersistAction.CREATE, ResourceBundle.getBundle("/Bundle").getString("UtilisateurCreated"));
         if (!JsfUtil.isValidationFailed()) {
             items = null;    // Invalidate list of items to trigger re-query.
         }
+        utilisateurs.setWrappedData(ejbFacade.findAll());
     }
 
     public void update() {

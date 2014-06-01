@@ -12,11 +12,13 @@
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 	<title>GDA</title>
 	        <h:outputStylesheet library="css" name="default.css"  />
-	
+	    <h:outputStylesheet library="css" name="jsfcrud.css"/>
+        <h:outputScript library="js" name="jsfcrud.js"/>
 	</h:head>
 
 
-	<h:body>			
+	<h:body>		
+	<p:growl id="growl" life="3000" />	
 		<p:layout fullPage="true" style="background-color:#FFFFFF;" id="ss">
 
 			<p:layoutUnit position="north" size="90" id="north">
@@ -27,7 +29,7 @@
 			</p:layoutUnit>
 
 			<p:layoutUnit styleClass="layoutUnitCenter" position="center" id="dd">
-					<ui:insert name="content" />
+					<ui:insert name="body" />
 			</p:layoutUnit>
 
 			<!-- 				<p:layoutUnit position="east" size="0" style="width:0px; display:none;" id="east"> -->
