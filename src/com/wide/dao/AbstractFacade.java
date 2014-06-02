@@ -8,6 +8,7 @@ package com.wide.dao;
 
 import java.util.List;
 import javax.persistence.EntityManager;
+import javax.persistence.EntityTransaction;
 
 /**
  *
@@ -23,15 +24,24 @@ public abstract class AbstractFacade<T> {
     protected abstract EntityManager getEntityManager();
 
     public void create(T entity) {
+    	EntityTransaction tx = getEntityManager().getTransaction();
+	 	tx.begin();
         getEntityManager().persist(entity);
+        tx.commit();
     }
 
     public void edit(T entity) {
+    	EntityTransaction tx = getEntityManager().getTransaction();
+	 	tx.begin();
         getEntityManager().merge(entity);
+        tx.commit();
     }
 
     public void remove(T entity) {
+    	EntityTransaction tx = getEntityManager().getTransaction();
+	 	tx.begin();
         getEntityManager().remove(getEntityManager().merge(entity));
+        tx.commit();
     }
 
     public T find(Object id) {

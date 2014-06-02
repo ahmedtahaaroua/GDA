@@ -1,5 +1,6 @@
 package com.wide.control;
 import java.io.Serializable;
+
 import java.util.List;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
