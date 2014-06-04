@@ -12,14 +12,12 @@
             <h:form id="LivraisonmagasinViewForm">
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{livraisonmagasinController.selected != null}">
-                        <h:outputText value="#{bundle.ViewLivraisonmagasinLabel_idLivraisonMagasin}"/>
-                        <h:outputText value="#{livraisonmagasinController.selected.idLivraisonMagasin}" title="#{bundle.ViewLivraisonmagasinTitle_idLivraisonMagasin}"/>
                         <h:outputText value="#{bundle.ViewLivraisonmagasinLabel_dateLivraison}"/>
                         <h:outputText value="#{livraisonmagasinController.selected.dateLivraison}" title="#{bundle.ViewLivraisonmagasinTitle_dateLivraison}">
                             <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
                         </h:outputText>
-                        <h:outputText value="#{bundle.ViewLivraisonmagasinLabel_idMagasin}"/>
-                        <h:outputText value="#{livraisonmagasinController.selected.idMagasin}" title="#{bundle.ViewLivraisonmagasinTitle_idMagasin}"/>
+                        <h:outputText value="Nom Magasin"/>
+                        <h:outputText value="#{livraisonmagasinController.selected.idMagasin.nomMagasin}" title="#{bundle.ViewLivraisonmagasinTitle_idMagasin}"/>
                     </p:panelGrid>
                     <p:commandButton value="#{bundle.Close}" onclick="LivraisonmagasinViewDialog.hide()"/>
                 </h:panelGroup>

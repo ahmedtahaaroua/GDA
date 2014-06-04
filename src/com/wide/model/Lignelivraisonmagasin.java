@@ -38,9 +38,9 @@ public class Lignelivraisonmagasin implements Serializable {
     private Integer idLigLivMag;
     @Column(name = "qteLiv")
     private Integer qteLiv;
-    @JoinColumn(name = "refProduit", referencedColumnName = "refProduit")
+    @JoinColumn(name = "refProduit", referencedColumnName = "refProd")
     @ManyToOne
-    private Lot refProduit;
+    private Produit refProduit;
     @JoinColumn(name = "idLivraisonMagasin", referencedColumnName = "idLivraisonMagasin")
     @ManyToOne
     private Livraisonmagasin idLivraisonMagasin;
@@ -68,15 +68,17 @@ public class Lignelivraisonmagasin implements Serializable {
         this.qteLiv = qteLiv;
     }
 
-    public Lot getRefProduit() {
-        return refProduit;
-    }
+   
 
-    public void setRefProduit(Lot refProduit) {
-        this.refProduit = refProduit;
-    }
+    public Produit getRefProduit() {
+		return refProduit;
+	}
 
-    public Livraisonmagasin getIdLivraisonMagasin() {
+	public void setRefProduit(Produit refProduit) {
+		this.refProduit = refProduit;
+	}
+
+	public Livraisonmagasin getIdLivraisonMagasin() {
         return idLivraisonMagasin;
     }
 

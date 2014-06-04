@@ -168,7 +168,7 @@ public class Magasin implements Serializable {
 
     @Override
     public String toString() {
-        return "tn.fitness.gda.Magasin[ idMagasin=" + idMagasin + " ]";
+        return this.nomMagasin;
     }
     
 }

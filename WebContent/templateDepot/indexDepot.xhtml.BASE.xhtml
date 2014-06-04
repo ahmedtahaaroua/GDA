@@ -1,0 +1,28 @@
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+
+  <ui:composition template="/templateDepot/template.xhtml">
+
+<!--         <ui:define name="title"> -->
+<!--             <h:outputText value="#{bundle.ListLocalTitle}"></h:outputText> -->
+<!--         </ui:define> -->
+
+        <ui:define name="body">
+        
+       <p:selectOneMenu value="#{magasinController.items.get(0).idMagasin}">
+				<f:selectItems id="item"
+					value="#{magasinController.items}" var="c"
+					itemLabel="#{c.nomMagasin}" itemValue="#{c.idMagasin}" />
+				 
+			</p:selectOneMenu>
+        
+        
+          responsable depot
+        </ui:define>
+ </ui:composition>
+</html>

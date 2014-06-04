@@ -6,7 +6,7 @@
       xmlns:f="http://xmlns.jcp.org/jsf/core"
       xmlns:p="http://primefaces.org/ui">
 
-      <ui:composition template="../template/templateadmin.xhtml">
+      <ui:composition template="../templateMagasigner/template.xhtml">
 
 
         <ui:define name="title">
@@ -27,11 +27,11 @@
                         <p:ajax event="rowSelect"   update="createButton viewButton editButton deleteButton"/>
                         <p:ajax event="rowUnselect" update="createButton viewButton editButton deleteButton"/>
 
-                        <p:column>
+                         <p:column>
                             <f:facet name="header">
-                                <h:outputText value="#{bundle.ListMagasinproduitTitle_idMagasinProd}"/>
+                                <h:outputText value="Produit"/>
                             </f:facet>
-                            <h:outputText value="#{item.idMagasinProd}"/>
+                            <h:outputText value="#{item.refProd.nomProduit}"/>
                         </p:column>
                         <p:column>
                             <f:facet name="header">
@@ -41,21 +41,16 @@
                         </p:column>
                         <p:column>
                             <f:facet name="header">
-                                <h:outputText value="#{bundle.ListMagasinproduitTitle_idMagasin}"/>
+                                <h:outputText value="Magasin"/>
                             </f:facet>
-                            <h:outputText value="#{item.idMagasin}"/>
+                            <h:outputText value="#{item.idMagasin.nomMagasin}"/>
                         </p:column>
-                        <p:column>
-                            <f:facet name="header">
-                                <h:outputText value="#{bundle.ListMagasinproduitTitle_refProd}"/>
-                            </f:facet>
-                            <h:outputText value="#{item.refProd}"/>
-                        </p:column>
+                       
                         <f:facet name="footer">
-                            <p:commandButton id="createButton" icon="ui-icon-plus"   value="#{bundle.Create}" actionListener="#{magasinproduitController.prepareCreate}" update=":MagasinproduitCreateForm" oncomplete="PF('MagasinproduitCreateDialog').show()"/>
+                            <p:commandButton id="createButton" icon="ui-icon-plus"   value="#{bundle.Create}" actionListener="#{magasinproduitController.prepareCreate}" update=":MagasinproduitCreateForm" oncomplete="PF('MagasinproduitCreateDialog').show()" style="visibility:hidden;"/>
                             <p:commandButton id="viewButton"   icon="ui-icon-search" value="#{bundle.View}" update=":MagasinproduitViewForm" oncomplete="PF('MagasinproduitViewDialog').show()" disabled="#{empty magasinproduitController.selected}"/>
-                            <p:commandButton id="editButton"   icon="ui-icon-pencil" value="#{bundle.Edit}" update=":MagasinproduitEditForm" oncomplete="PF('MagasinproduitEditDialog').show()" disabled="#{empty magasinproduitController.selected}"/>
-                            <p:commandButton id="deleteButton" icon="ui-icon-trash"  value="#{bundle.Delete}" actionListener="#{magasinproduitController.destroy}" update=":growl,datalist" disabled="#{empty magasinproduitController.selected}"/>
+                            <p:commandButton id="editButton"   icon="ui-icon-pencil" value="Ajouter Quantite" update=":MagasinproduitEditForm" oncomplete="PF('MagasinproduitEditDialog').show()" disabled="#{empty magasinproduitController.selected}"/>
+                            <p:commandButton id="deleteButton" icon="ui-icon-trash"  value="#{bundle.Delete}" actionListener="#{magasinproduitController.destroy}" update=":growl,datalist" disabled="#{empty magasinproduitController.selected}" style="visibility:hidden;"/>
                         </f:facet>
                     </p:dataTable>
                 </p:panel>

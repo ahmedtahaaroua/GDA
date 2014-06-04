@@ -41,7 +41,7 @@ public class Lot implements Serializable {
     private Integer refProduit;
     @Column(name = "qte")
     private Integer qte;
-    @OneToMany(mappedBy = "refProduit")
+    
     private Collection<Lignelivraisonmagasin> lignelivraisonmagasinCollection;
     @JoinColumn(name = "idFournisseur", referencedColumnName = "id_fournisseur")
     @ManyToOne
