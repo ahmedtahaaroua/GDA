@@ -40,10 +40,10 @@
                             <h:outputText value="#{item.nomFamille}"/>
                         </p:column>
                         <f:facet name="footer">
-                            <p:commandButton id="createButton" icon="ui-icon-plus"   value="#{bundle.Create}" actionListener="#{familleController.prepareCreate}" update=":FamilleCreateForm" oncomplete="PF('FamilleCreateDialog').show()"/>
-                            <p:commandButton id="viewButton"   icon="ui-icon-search" value="#{bundle.View}" update=":FamilleViewForm" oncomplete="PF('FamilleViewDialog').show()" disabled="#{empty familleController.selected}"/>
-                            <p:commandButton id="editButton"   icon="ui-icon-pencil" value="#{bundle.Edit}" update=":FamilleEditForm" oncomplete="PF('FamilleEditDialog').show()" disabled="#{empty familleController.selected}"/>
-                            <p:commandButton id="deleteButton" icon="ui-icon-trash"  value="#{bundle.Delete}" actionListener="#{familleController.destroy}" update=":growl,datalist" disabled="#{empty familleController.selected}"/>
+                            <p:commandButton id="createButton" icon="ui-icon-plus"   value="Ajouter" actionListener="#{familleController.prepareCreate}" update=":FamilleCreateForm" oncomplete="PF('FamilleCreateDialog').show()"/>
+                            <p:commandButton id="viewButton"   icon="ui-icon-search" value="Consulter" update=":FamilleViewForm" oncomplete="PF('FamilleViewDialog').show()" disabled="#{empty familleController.selected}"/>
+                            <p:commandButton id="editButton"   icon="ui-icon-pencil" value="Modifier" update=":FamilleEditForm" oncomplete="PF('FamilleEditDialog').show()" disabled="#{empty familleController.selected}"/>
+                            <p:commandButton id="deleteButton" icon="ui-icon-trash"  value="Supprimer" actionListener="#{familleController.destroy}" update=":growl,datalist" disabled="#{empty familleController.selected}"/>
                         </f:facet>
                     </p:dataTable>
                 </p:panel>

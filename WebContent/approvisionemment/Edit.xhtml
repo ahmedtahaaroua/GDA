@@ -13,18 +13,14 @@
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{approvisionemmentController.selected != null}">
                         <p:outputLabel value="#{bundle.EditApprovisionemmentLabel_idApprovisionnement}" for="idApprovisionnement" />
-                        <p:inputText id="idApprovisionnement" value="#{approvisionemmentController.selected.idApprovisionnement}" title="#{bundle.EditApprovisionemmentTitle_idApprovisionnement}" required="true" requiredMessage="#{bundle.EditApprovisionemmentRequiredMessage_idApprovisionnement}"/>
+                        <p:outputLabel id="idApprovisionnement" value="#{approvisionemmentController.selected.idApprovisionnement}" title="#{bundle.EditApprovisionemmentTitle_idApprovisionnement}" required="true" requiredMessage="#{bundle.EditApprovisionemmentRequiredMessage_idApprovisionnement}"/>
                         <p:outputLabel value="#{bundle.EditApprovisionemmentLabel_dateCreation}" for="dateCreation" />
-                        <p:calendar id="dateCreation" pattern="MM/dd/yyyy HH:mm:ss" value="#{approvisionemmentController.selected.dateCreation}" title="#{bundle.EditApprovisionemmentTitle_dateCreation}"  showOn="button"/>
+                        <p:outputLabel id="dateCreation" pattern="MM/dd/yyyy HH:mm:ss" value="#{approvisionemmentController.selected.dateCreation}" title="#{bundle.EditApprovisionemmentTitle_dateCreation}"  showOn="button"/>
                         <p:outputLabel value="#{bundle.EditApprovisionemmentLabel_validee}" for="validee" />
                         <p:selectBooleanCheckbox id="validee" value="#{approvisionemmentController.selected.validee}" />
                         <p:outputLabel value="#{bundle.EditApprovisionemmentLabel_idMagasin}" for="idMagasin" />
-                        <p:selectOneMenu id="idMagasin" value="#{approvisionemmentController.selected.idMagasin}" >
-                            <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
-                            <f:selectItems value="#{magasinController.itemsAvailableSelectOne}"
-                                           var="idMagasinItem"
-                                           itemValue="#{idMagasinItem}"/>
-                        </p:selectOneMenu>
+                          <p:outputLabel id="idMagasin" value="#{approvisionemmentController.selected.idMagasin.nomMagasin}" title="#{bundle.EditApprovisionemmentTitle_idApprovisionnement}" required="true" requiredMessage="#{bundle.EditApprovisionemmentRequiredMessage_idApprovisionnement}"/>
+                      
                     </p:panelGrid>
                     <p:commandButton actionListener="#{approvisionemmentController.update}" value="#{bundle.Save}" update="display,:ApprovisionemmentListForm:datalist,:growl" oncomplete="handleSubmit(args, 'ApprovisionemmentEditDialog');"/>
                     <p:commandButton value="#{bundle.Cancel}" onclick="ApprovisionemmentEditDialog.hide()"/>

@@ -7,7 +7,9 @@
 package com.wide.model;
 import java.io.Serializable;
 import java.util.Collection;
+
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -48,11 +50,16 @@ public class Fournisseurs implements Serializable {
     private String adresse;
     @Column(name = "tel")
     private Integer tel;
+    
     @OneToMany(mappedBy = "idFournisseur")
     private Collection<Lot> lotCollection;
+    
     @OneToMany(mappedBy = "idFournisseur")
     private Collection<Commande> commandeCollection;
-
+    
+    @OneToMany(mappedBy = "idFournisseur")
+    private Collection<Produit> produitsCollection;
+    
     public Fournisseurs() {
     }
 
@@ -68,7 +75,15 @@ public class Fournisseurs implements Serializable {
         this.idFournisseur = idFournisseur;
     }
 
-    public String getNomFournisseur() {
+    public Collection<Produit> getProduitsCollection() {
+		return produitsCollection;
+	}
+
+	public void setProduitsCollection(Collection<Produit> produitsCollection) {
+		this.produitsCollection = produitsCollection;
+	}
+
+	public String getNomFournisseur() {
         return nomFournisseur;
     }
 
@@ -132,7 +147,7 @@ public class Fournisseurs implements Serializable {
 
     @Override
     public String toString() {
-        return "tn.fitness.gda.Fournisseurs[ idFournisseur=" + idFournisseur + " ]";
+        return this.nomFournisseur;
     }
     
 }

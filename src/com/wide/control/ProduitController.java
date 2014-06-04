@@ -51,6 +51,7 @@ public class ProduitController implements Serializable {
     }
 
     protected void initializeEmbeddableKey() {
+    	
     }
 
     private ProduitFacade getFacade() {

@@ -4,42 +4,56 @@
 <ui:composition xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:p="http://primefaces.org/ui"
-	xmlns:f="http://java.sun.com/jsf/core"
-	>
+	xmlns:f="http://java.sun.com/jsf/core">
 
-<h:form>  
-              
-    <p:growl id="messages" autoUpdate="true"/>  
-  
-    <p:panelMenu style="width:80%;">  
-       
-       
-            
-            <p:submenu label="Gestion des Produits" >  
-  <p:menuitem value="Liste Produits"  outcome="/produit/List"  icon="ui-icon-home"  />  
-     <p:menuitem value="Liste Famille"  outcome="/famille/List"  icon="ui-icon-home"  />  
-                    
-            </p:submenu>
-             <p:submenu label="Gestion des Magasins" >  
-         <p:menuitem value="Liste Magasins"  outcome="/magasin/List"  icon="ui-icon-home"  />  
-             
-                    
-            </p:submenu>
-             <p:submenu label="Gestion des Commandes" >  
-         <p:menuitem value="Liste Commandes"  outcome="/commande/List"  icon="ui-icon-home"  />  
-        <p:menuitem value="Liste Ligne Commandes"  outcome="/ligneCommande/List"  icon="ui-icon-home"  />  
-                    
-            </p:submenu>
-                <p:submenu label="Gestion des Fournisseurs" >  
-        
-                   <p:menuitem value="Liste Fournisseurs"  outcome="/fournisseurs/List"  icon="ui-icon-home"  />  
-   
-                </p:submenu>         
-                        
-                      
-                   
-    </p:panelMenu>  
-  
-</h:form>
+	<h:form>
+
+		<p:growl id="messages" autoUpdate="true" />
+
+		<p:panelMenu style="width:80%;">
+
+
+
+			<p:submenu label="Gestion des Produits">
+				<p:menuitem value="Liste des Produits" outcome="/produit/List"
+					icon="ui-icon-home" />
+				<p:menuitem value="Liste des familles de produits" outcome="/famille/List"
+					icon="ui-icon-home" />
+
+			</p:submenu>
+			<p:submenu label="Gestion des Magasins">
+				<p:menuitem value="Liste des Magasins" outcome="/magasin/List"
+					icon="ui-icon-home" />
+
+
+			</p:submenu>
+			<p:submenu label="Gestion des Commandes" >
+				<p:menuitem value="Commander un nouveau produit" outcome="/commande/newProduit"
+					icon="ui-icon-home" />
+			  <p:menuitem value="Commander des produits exsistants" outcome="/commande/newProduit"
+					icon="ui-icon-home" />
+			
+
+			</p:submenu>
+			<p:submenu label="Gestion des Fournisseurs">
+
+		    <p:menuitem value="Liste Fournisseurs" outcome="/fournisseurs/List"
+					icon="ui-icon-home" />
+
+			</p:submenu>
+			
+			<p:submenu label="Gestion des Livraisons">
+			<p:menuitem value="Validation des Approvisionnements" outcome="/approvisionemment/List"
+					icon="ui-icon-home" />
+
+
+			</p:submenu>
+
+
+
+
+		</p:panelMenu>
+
+	</h:form>
 </ui:composition>
 

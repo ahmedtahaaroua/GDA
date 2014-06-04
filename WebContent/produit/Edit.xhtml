@@ -24,12 +24,20 @@
                         <p:inputText id="quantiteMin" value="#{produitController.selected.quantiteMin}" title="#{bundle.EditProduitTitle_quantiteMin}" />
                         <p:outputLabel value="#{bundle.EditProduitLabel_quantiteMax}" for="quantiteMax" />
                         <p:inputText id="quantiteMax" value="#{produitController.selected.quantiteMax}" title="#{bundle.EditProduitTitle_quantiteMax}" />
-                        <p:outputLabel value="#{bundle.EditProduitLabel_idFamille}" for="idFamille" />
+                        <p:outputLabel value="Famille" for="idFamille" />
                         <p:selectOneMenu id="idFamille" value="#{produitController.selected.idFamille}" required="true" requiredMessage="#{bundle.EditProduitRequiredMessage_idFamille}">
                             <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
                             <f:selectItems value="#{familleController.itemsAvailableSelectOne}"
                                            var="idFamilleItem"
                                            itemValue="#{idFamilleItem}"/>
+                        </p:selectOneMenu>
+                       
+                         <p:outputLabel value="Fournisseur" for="idFournisseur" />
+                         <p:selectOneMenu id="idFournisseur" value="#{produitController.selected.idFournisseur}" required="true" requiredMessage="#{bundle.EditProduitRequiredMessage_idFournisseur}">
+                            <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
+                            <f:selectItems value="#{fournisseursController.itemsAvailableSelectOne}"
+                                           var="idFournisseurItem"
+                                           itemValue="#{idFournisseurItem}"/>
                         </p:selectOneMenu>
                     </p:panelGrid>
                     <p:commandButton actionListener="#{produitController.update}" value="#{bundle.Save}" update="display,:ProduitListForm:datalist,:growl" oncomplete="handleSubmit(args, 'ProduitEditDialog');"/>

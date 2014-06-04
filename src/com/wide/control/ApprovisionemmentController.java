@@ -2,6 +2,8 @@ package com.wide.control;
 
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
@@ -14,9 +16,12 @@ import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import javax.faces.convert.FacesConverter;
+import javax.faces.model.DataModel;
+import javax.faces.model.ListDataModel;
 import javax.inject.Named;
 
 import com.wide.dao.ApprovisionemmentFacade;
+import com.wide.dao.FamilleFacade;
 import com.wide.jpaUtil.JsfUtil;
 import com.wide.jpaUtil.JsfUtil.PersistAction;
 import com.wide.model.Approvisionemment;
@@ -28,8 +33,33 @@ public class ApprovisionemmentController implements Serializable {
     private ApprovisionemmentFacade ejbFacade;
     private List<Approvisionemment> items = null;
     private Approvisionemment selected;
+    private DataModel approv;
+    private int n;
+    
+    public int getN() {
+    	
+    	if (items == null)
+    		return 0;
+    	else 
+    	{
+    		return 	items.size();
+    		
+    	}
+	}
 
-    public ApprovisionemmentController() {
+	public void setN(int n) {
+		this.n = n;
+	}
+
+	public ApprovisionemmentController() {
+    	
+    	ejbFacade=new ApprovisionemmentFacade();
+    	if (items == null) {
+    		approv = new ListDataModel();
+    		approv.setWrappedData(ejbFacade.findAll());
+
+		}
+    	
     }
 
     public Approvisionemment getSelected() {
@@ -61,6 +91,7 @@ public class ApprovisionemmentController implements Serializable {
         if (!JsfUtil.isValidationFailed()) {
             items = null;    // Invalidate list of items to trigger re-query.
         }
+        approv.setWrappedData(ejbFacade.findAll());
     }
 
     public void update() {
@@ -76,9 +107,18 @@ public class ApprovisionemmentController implements Serializable {
     }
 
     public List<Approvisionemment> getItems() {
-        if (items == null) {
-            items = getFacade().findAll();
-        }
+       items=new ArrayList<Approvisionemment>();
+        	List<Approvisionemment> approvisionemments=getFacade().findAll();
+        			
+         
+            for (Approvisionemment i : approvisionemments) {
+            	if (! i.getValidee())
+            		items.add(i);
+            	
+            		
+				
+			}
+     
         return items;
     }
 

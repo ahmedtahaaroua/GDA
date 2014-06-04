@@ -24,8 +24,11 @@
                         <h:outputText value="#{produitController.selected.quantiteMin}" title="#{bundle.ViewProduitTitle_quantiteMin}"/>
                         <h:outputText value="#{bundle.ViewProduitLabel_quantiteMax}"/>
                         <h:outputText value="#{produitController.selected.quantiteMax}" title="#{bundle.ViewProduitTitle_quantiteMax}"/>
-                        <h:outputText value="#{bundle.ViewProduitLabel_idFamille}"/>
-                        <h:outputText value="#{produitController.selected.idFamille}" title="#{bundle.ViewProduitTitle_idFamille}"/>
+                        <h:outputText value="Famille"/>
+                        <h:outputText value="#{produitController.selected.idFamille.nomFamille}" title="Famille"/>
+                         <h:outputText value="Founisseur"/>
+                        <h:outputText value="#{produitController.selected.idFournisseur.nomFournisseur}" title="Fournisseur"/>
+                        
                     </p:panelGrid>
                     <p:commandButton value="#{bundle.Close}" onclick="ProduitViewDialog.hide()"/>
                 </h:panelGroup>

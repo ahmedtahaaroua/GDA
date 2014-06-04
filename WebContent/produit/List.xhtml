@@ -69,11 +69,17 @@
                             </f:facet>
                             <h:outputText value="#{item.idFamille}"/>
                         </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="Fournisseur"/>
+                            </f:facet>
+                            <h:outputText value="#{item.idFournisseur}"/>
+                        </p:column>
                         <f:facet name="footer">
-                            <p:commandButton id="createButton" icon="ui-icon-plus"   value="#{bundle.Create}" actionListener="#{produitController.prepareCreate}" update=":ProduitCreateForm" oncomplete="PF('ProduitCreateDialog').show()"/>
-                            <p:commandButton id="viewButton"   icon="ui-icon-search" value="#{bundle.View}" update=":ProduitViewForm" oncomplete="PF('ProduitViewDialog').show()" disabled="#{empty produitController.selected}"/>
-                            <p:commandButton id="editButton"   icon="ui-icon-pencil" value="#{bundle.Edit}" update=":ProduitEditForm" oncomplete="PF('ProduitEditDialog').show()" disabled="#{empty produitController.selected}"/>
-                            <p:commandButton id="deleteButton" icon="ui-icon-trash"  value="#{bundle.Delete}" actionListener="#{produitController.destroy}" update=":growl,datalist" disabled="#{empty produitController.selected}"/>
+                            <p:commandButton id="createButton" icon="ui-icon-plus"   value="Ajouter" actionListener="#{produitController.prepareCreate}" update=":ProduitCreateForm" oncomplete="PF('ProduitCreateDialog').show()"/>
+                            <p:commandButton id="viewButton"   icon="ui-icon-search" value="Consulter" update=":ProduitViewForm" oncomplete="PF('ProduitViewDialog').show()" disabled="#{empty produitController.selected}"/>
+                            <p:commandButton id="editButton"   icon="ui-icon-pencil" value="Modifier" update=":ProduitEditForm" oncomplete="PF('ProduitEditDialog').show()" disabled="#{empty produitController.selected}"/>
+                            <p:commandButton id="deleteButton" icon="ui-icon-trash"  value="Supprimer" actionListener="#{produitController.destroy}" update=":growl,datalist" disabled="#{empty produitController.selected}"/>
                         </f:facet>
                     </p:dataTable>
                 </p:panel>

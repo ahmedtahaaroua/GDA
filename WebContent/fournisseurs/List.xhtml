@@ -52,10 +52,10 @@
                             <h:outputText value="#{item.tel}"/>
                         </p:column>
                         <f:facet name="footer">
-                            <p:commandButton id="createButton" icon="ui-icon-plus"   value="#{bundle.Create}" actionListener="#{fournisseursController.prepareCreate}" update=":FournisseursCreateForm" oncomplete="PF('FournisseursCreateDialog').show()"/>
-                            <p:commandButton id="viewButton"   icon="ui-icon-search" value="#{bundle.View}" update=":FournisseursViewForm" oncomplete="PF('FournisseursViewDialog').show()" disabled="#{empty fournisseursController.selected}"/>
-                            <p:commandButton id="editButton"   icon="ui-icon-pencil" value="#{bundle.Edit}" update=":FournisseursEditForm" oncomplete="PF('FournisseursEditDialog').show()" disabled="#{empty fournisseursController.selected}"/>
-                            <p:commandButton id="deleteButton" icon="ui-icon-trash"  value="#{bundle.Delete}" actionListener="#{fournisseursController.destroy}" update=":growl,datalist" disabled="#{empty fournisseursController.selected}"/>
+                            <p:commandButton id="createButton" icon="ui-icon-plus"   value="Ajouter" actionListener="#{fournisseursController.prepareCreate}" update=":FournisseursCreateForm" oncomplete="PF('FournisseursCreateDialog').show()"/>
+                            <p:commandButton id="viewButton"   icon="ui-icon-search" value="Consulter" update=":FournisseursViewForm" oncomplete="PF('FournisseursViewDialog').show()" disabled="#{empty fournisseursController.selected}"/>
+                            <p:commandButton id="editButton"   icon="ui-icon-pencil" value="Modifier" update=":FournisseursEditForm" oncomplete="PF('FournisseursEditDialog').show()" disabled="#{empty fournisseursController.selected}"/>
+                            <p:commandButton id="deleteButton" icon="ui-icon-trash"  value="Supprimer" actionListener="#{fournisseursController.destroy}" update=":growl,datalist" disabled="#{empty fournisseursController.selected}"/>
                         </f:facet>
                     </p:dataTable>
                 </p:panel>
