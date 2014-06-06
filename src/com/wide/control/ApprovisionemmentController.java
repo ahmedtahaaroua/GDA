@@ -4,7 +4,12 @@ package com.wide.control;
 import java.io.IOException;
 import java.io.Serializable;
 import java.util.ArrayList;
+
 import java.util.HashMap;
+
+import java.util.Date;
+import java.util.Iterator;
+
 import java.util.List;
 import java.util.Map;
 import java.util.ResourceBundle;
@@ -30,9 +35,19 @@ import net.sf.jasperreports.engine.JasperPrint;
 import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
 
 import com.wide.dao.ApprovisionemmentFacade;
+
+import com.wide.dao.FamilleFacade;
+import com.wide.dao.LigneapprovisionnementFacade;
+import com.wide.dao.LignelivraisonFacade;
+import com.wide.dao.LignelivraisonmagasinFacade;
+import com.wide.dao.LivraisonmagasinFacade;
+
 import com.wide.jpaUtil.JsfUtil;
 import com.wide.jpaUtil.JsfUtil.PersistAction;
 import com.wide.model.Approvisionemment;
+import com.wide.model.Ligneapprovisionnement;
+import com.wide.model.Lignelivraisonmagasin;
+import com.wide.model.Livraisonmagasin;
 
 @Named("approvisionemmentController")
 @SessionScoped
@@ -63,11 +78,11 @@ public class ApprovisionemmentController implements Serializable {
 	public ApprovisionemmentController() {
     	
     	ejbFacade=new ApprovisionemmentFacade();
-    	if (items == null) {
+    
     		approv = new ListDataModel();
     		approv.setWrappedData(ejbFacade.findAll());
 
-		}
+		
     	
     }
 
@@ -104,6 +119,33 @@ public class ApprovisionemmentController implements Serializable {
     }
 
     public void update() {
+    	
+
+    	LivraisonmagasinFacade livraisonmagasinFacade=new LivraisonmagasinFacade();
+    	LignelivraisonmagasinFacade lignelivraisonmagasinFacade=new LignelivraisonmagasinFacade();
+    	
+    	Livraisonmagasin livraisonmagasin=new Livraisonmagasin();
+    	livraisonmagasin.setIdMagasin(selected.getIdMagasin());
+    	livraisonmagasin.setDateLivraison(new Date());
+    	
+    	livraisonmagasinFacade.create(livraisonmagasin);
+    	LigneapprovisionnementFacade ligneapprovisionnementFacade=new LigneapprovisionnementFacade();
+    	List<Ligneapprovisionnement> ligneapprovisionnements=ligneapprovisionnementFacade.findAll();
+    	for(Ligneapprovisionnement ligneapprovisionnement:ligneapprovisionnements)
+    	{
+    	
+    		if(ligneapprovisionnement.getIdApprovisionnement().getIdApprovisionnement()==selected.getIdApprovisionnement()){
+    		Lignelivraisonmagasin lignelivraisonmagasin=new Lignelivraisonmagasin();
+    		lignelivraisonmagasin.setIdLivraisonMagasin(livraisonmagasin);
+    		lignelivraisonmagasin.setRefProduit(ligneapprovisionnement.getRefProd());
+    		lignelivraisonmagasinFacade.create(lignelivraisonmagasin);
+    		System.out.println("aaaaaaaaaaaaaaaaaaaaaaaaaaLigneeeeeeee");
+    		}
+    		
+    	}
+    	
+    	
+    	
         persist(PersistAction.UPDATE, ResourceBundle.getBundle("/Bundle").getString("ApprovisionemmentUpdated"));
         
         

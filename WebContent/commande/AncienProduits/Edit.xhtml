@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+<ui:composition>
+
+	<p:dialog id="ProduitEditDlg" widgetVar="ProduitEditDialog"
+		modal="true" resizable="false" appendTo="@(body)"
+		header="#{bundle.EditProduitTitle}">
+		<h:form id="ProduitEditForm">
+			<h:panelGroup id="display">
+				<p:panelGrid columns="2"
+					rendered="#{produitController.selected != null}">
+					<p:outputLabel value="#{bundle.EditProduitLabel_refProd}"
+						for="refProd" />
+					<p:outputLabel id="refProd"
+						value="#{produitController.selected.refProd}"
+						title="#{bundle.EditProduitTitle_refProd}" required="true"
+						requiredMessage="#{bundle.EditProduitRequiredMessage_refProd}" />
+					<p:outputLabel value="#{bundle.EditProduitLabel_nomProduit}"
+						for="nomProduit" />
+					<p:outputLabel id="nomProduit"
+						value="#{produitController.selected.nomProduit}"
+						title="#{bundle.EditProduitTitle_nomProduit}" />
+					<p:outputLabel value="#{bundle.EditProduitLabel_quantite}"
+						for="quantite" />
+					<p:inputText id="quantite"
+						value="#{produitController.qteCommande}"
+						title="#{bundle.EditProduitTitle_quantite}" />
+					<p:outputLabel value="#{bundle.EditProduitLabel_prixAchat}"
+						for="prixAchat" />
+					<p:outputLabel id="prixAchat"
+						value="#{produitController.selected.prixAchat}"
+						title="#{bundle.EditProduitTitle_prixAchat}" />
+					<p:outputLabel value="#{bundle.EditProduitLabel_quantiteMin}"
+						for="quantiteMin" />
+					<p:outputLabel id="quantiteMin"
+						value="#{produitController.selected.quantiteMin}"
+						title="#{bundle.EditProduitTitle_quantiteMin}" />
+					<p:outputLabel value="#{bundle.EditProduitLabel_quantiteMax}"
+						for="quantiteMax" />
+					<p:outputLabel id="quantiteMax"
+						value="#{produitController.selected.quantiteMax}"
+						title="#{bundle.EditProduitTitle_quantiteMax}" />
+				</p:panelGrid>
+				<p:commandButton
+					actionListener="#{produitController.updateCommande}"
+					value="Envoye demande Commande"
+					update="display,:ProduitListForm:datalist,:growl"
+					oncomplete="handleSubmit(args, 'ProduitEditDialog');" />
+
+				<p:commandButton value="#{bundle.Cancel}"
+					onclick="ProduitEditDialog.hide()" />
+			</h:panelGroup>
+		</h:form>
+	</p:dialog>
+
+</ui:composition>
+</html>

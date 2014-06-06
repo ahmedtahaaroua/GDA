@@ -74,9 +74,7 @@ public class LignelivraisonmagasinController implements Serializable {
     }
 
     public List<Lignelivraisonmagasin> getItems() {
-        if (items == null) {
             items = getFacade().findAll();
-        }
         return items;
     }
 

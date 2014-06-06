@@ -38,12 +38,10 @@ public class MagasinController implements Serializable {
     
     public MagasinController() {
     	ejbFacade=new MagasinFacade();
-    	if (items == null) {
 			magasins = new ListDataModel();
 			magasins.setWrappedData(ejbFacade.findAll());
 
 
-		}
     }
 
     public void setItems(List<Magasin> items) {
@@ -95,10 +93,8 @@ public class MagasinController implements Serializable {
     }
 
     public List<Magasin> getItems() {
-        if (items == null) {
 
             items = getFacade().findAll();
-        }
         return items;
     }
 

@@ -73,9 +73,7 @@ public class TransfertController implements Serializable {
     }
 
     public List<Transfert> getItems() {
-        if (items == null) {
             items = getFacade().findAll();
-        }
         return items;
     }
 

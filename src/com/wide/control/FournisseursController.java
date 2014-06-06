@@ -31,11 +31,8 @@ public class FournisseursController implements Serializable {
     private DataModel fourniseurs;
     public FournisseursController() {
     	ejbFacade=new FournisseursFacade();
-    	if (items == null) {
     		fourniseurs = new ListDataModel();
     		fourniseurs.setWrappedData(ejbFacade.findAll());
-
-		}
     }
 
     public Fournisseurs getSelected() {

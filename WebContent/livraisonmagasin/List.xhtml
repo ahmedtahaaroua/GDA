@@ -30,9 +30,7 @@
 		<p:dialog appendToBody="true" header="Information du Livraison" widgetVar="livraisonmagasinMagasinViewDialog"
 			modal="true" showEffect="fade" hideEffect="fade" resizable="false"
 			width="250">
-			
-				 <h:form id="form2">
-                <h:panelGroup id="display">
+			 <p:outputPanel id="form2" style="text-align:center;" layout="block">
 				<p:panelGrid columns="2"
 					rendered="#{not empty livraisonmagasinController.selected}"
 					columnClasses="value">
@@ -50,8 +48,7 @@
                         </p:selectOneMenu>
                         
 				</p:panelGrid>
-			</h:panelGroup>
-			</h:form>
+				</p:outputPanel>
 		</p:dialog>
 		</h:form>
         </ui:define>

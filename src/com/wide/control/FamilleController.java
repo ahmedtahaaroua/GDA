@@ -32,11 +32,10 @@ public class FamilleController implements Serializable {
 
     public FamilleController() {
     	ejbFacade=new FamilleFacade();
-    	if (items == null) {
+    
     		familles = new ListDataModel();
     		familles.setWrappedData(ejbFacade.findAll());
-
-		}
+		
     	
     }
 
@@ -85,9 +84,7 @@ public class FamilleController implements Serializable {
     }
 
     public List<Famille> getItems() {
-        if (items == null) {
             items = getFacade().findAll();
-        }
         return items;
     }
 

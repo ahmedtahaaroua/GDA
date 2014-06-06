@@ -55,11 +55,9 @@ public class MagasinproduitController implements Serializable {
 
 	public MagasinproduitController() {
 		ejbFacade = new MagasinproduitFacade();
-		if (items == null) {
 			magasinProduit = new ListDataModel();
 			magasinProduit.setWrappedData(ejbFacade.findAll());
 
-		}
 	}
 
 	public Magasinproduit getSelected() {
@@ -133,9 +131,7 @@ public class MagasinproduitController implements Serializable {
 	}
 
 	public List<Magasinproduit> getItems() {
-		if (items == null) {
 			items = getFacade().findAll();
-		}
 		return items;
 	}
 
