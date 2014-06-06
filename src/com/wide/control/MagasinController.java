@@ -5,7 +5,6 @@ import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import javax.ejb.EJB;
 import javax.ejb.EJBException;
 import javax.enterprise.context.SessionScoped;
 import javax.faces.component.UIComponent;
@@ -14,14 +13,9 @@ import javax.faces.convert.Converter;
 import javax.faces.convert.FacesConverter;
 import javax.faces.model.DataModel;
 import javax.faces.model.ListDataModel;
-
-import javax.faces.model.SelectItem;
-
-
 import javax.inject.Named;
 
 import com.wide.dao.MagasinFacade;
-import com.wide.dao.UtilisateurFacade;
 import com.wide.jpaUtil.JsfUtil;
 import com.wide.jpaUtil.JsfUtil.PersistAction;
 import com.wide.model.Magasin;

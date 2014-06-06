@@ -16,7 +16,6 @@ import javax.faces.model.ListDataModel;
 import javax.inject.Named;
 
 import com.wide.dao.FamilleFacade;
-import com.wide.dao.MagasinFacade;
 import com.wide.jpaUtil.JsfUtil;
 import com.wide.jpaUtil.JsfUtil.PersistAction;
 import com.wide.model.Famille;

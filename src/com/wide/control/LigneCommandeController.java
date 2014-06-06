@@ -5,7 +5,6 @@ import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import javax.ejb.EJB;
 import javax.ejb.EJBException;
 import javax.enterprise.context.SessionScoped;
 import javax.faces.component.UIComponent;
@@ -16,7 +15,6 @@ import javax.faces.model.DataModel;
 import javax.faces.model.ListDataModel;
 import javax.inject.Named;
 
-import com.wide.dao.FamilleFacade;
 import com.wide.dao.LigneCommandeFacade;
 import com.wide.jpaUtil.JsfUtil;
 import com.wide.jpaUtil.JsfUtil.PersistAction;

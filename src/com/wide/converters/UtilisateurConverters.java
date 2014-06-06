@@ -4,10 +4,8 @@ import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import javax.faces.convert.FacesConverter;
 
-import com.wide.model.Utilisateur;
-
-
 import com.wide.dao.Dao;
+import com.wide.model.Utilisateur;
 
 
 @FacesConverter(forClass= Utilisateur.class)
