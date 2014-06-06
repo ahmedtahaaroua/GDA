@@ -28,7 +28,7 @@
 				<ui:include src="menuadmin.xhtml" />
 			</p:layoutUnit>
 
-			<p:layoutUnit styleClass="layoutUnitCenter" position="center" id="dd">
+			<p:layoutUnit styleClass="layoutUnitCenter" position="center" id="dd" rendered="#{loginBean.username != null}">
 					<ui:insert name="body" />
 			</p:layoutUnit>
 

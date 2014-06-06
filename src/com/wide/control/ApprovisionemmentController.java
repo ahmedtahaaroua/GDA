@@ -1,15 +1,16 @@
 package com.wide.control;
 
 
+import java.io.IOException;
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Iterator;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import javax.ejb.EJB;
 import javax.ejb.EJBException;
 import javax.enterprise.context.SessionScoped;
 import javax.faces.component.UIComponent;
@@ -19,9 +20,16 @@ import javax.faces.convert.FacesConverter;
 import javax.faces.model.DataModel;
 import javax.faces.model.ListDataModel;
 import javax.inject.Named;
+import javax.servlet.ServletOutputStream;
+import javax.servlet.http.HttpServletResponse;
+
+import net.sf.jasperreports.engine.JRException;
+import net.sf.jasperreports.engine.JasperExportManager;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
 
 import com.wide.dao.ApprovisionemmentFacade;
-import com.wide.dao.FamilleFacade;
 import com.wide.jpaUtil.JsfUtil;
 import com.wide.jpaUtil.JsfUtil.PersistAction;
 import com.wide.model.Approvisionemment;
@@ -35,6 +43,7 @@ public class ApprovisionemmentController implements Serializable {
     private Approvisionemment selected;
     private DataModel approv;
     private int n;
+	private JasperPrint jasperPrint;
     
     public int getN() {
     	
@@ -96,9 +105,57 @@ public class ApprovisionemmentController implements Serializable {
 
     public void update() {
         persist(PersistAction.UPDATE, ResourceBundle.getBundle("/Bundle").getString("ApprovisionemmentUpdated"));
+        
+        
+        
     }
+    public void GenererPDF() {
+		
+			
+			
+			   init();  
+		       HttpServletResponse httpServletResponse=(HttpServletResponse)FacesContext.getCurrentInstance().getExternalContext().getResponse();  
+		      httpServletResponse.addHeader("Content-disposition", "attachment; filename=report.pdf");  
+		       ServletOutputStream servletOutputStream = null;
+			try {
+				servletOutputStream = httpServletResponse.getOutputStream();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}  
+		       try {
+				JasperExportManager.exportReportToPdfStream(jasperPrint, servletOutputStream);
+			} catch (JRException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}  
+		       FacesContext.getCurrentInstance().responseComplete();  	
+		
+    }
+    
+    private void init() {
+    	Map parameters = new HashMap();
 
-    public void destroy() {
+		parameters.put("id", selected.getIdApprovisionnement());
+		parameters.put("nomR", "nom resp");
+		parameters.put("prenomR", "prenpdsdsd");
+		parameters.put("telR", "212121");
+		parameters.put("nomM", "sdsd");
+		parameters.put("prenomM", "sdsd");
+		parameters.put("telM", "555");
+		parameters.put("magasin", selected.getIdMagasin().getNomMagasin());
+    	 JRBeanCollectionDataSource beanCollectionDataSource=new JRBeanCollectionDataSource(items);  
+    	 String  reportPath=  FacesContext.getCurrentInstance().getExternalContext().getRealPath("/bonLivraison.jasper");       
+    	 try {
+			jasperPrint=JasperFillManager.fillReport(reportPath, parameters,beanCollectionDataSource);
+		} catch (JRException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}  
+		
+	}
+
+	public void destroy() {
         persist(PersistAction.DELETE, ResourceBundle.getBundle("/Bundle").getString("ApprovisionemmentDeleted"));
         if (!JsfUtil.isValidationFailed()) {
             selected = null; // Remove selection

@@ -67,6 +67,8 @@
                             <p:commandButton id="viewButton"   icon="ui-icon-search" value="Afficher" update=":ApprovisionemmentViewForm" oncomplete="PF('ApprovisionemmentViewDialog').show()" disabled="#{empty approvisionemmentController.selected}"/>
                             <p:commandButton id="editButton"   icon="ui-icon-pencil" value="Valider Approvisionnement" update=":ApprovisionemmentEditForm" oncomplete="PF('ApprovisionemmentEditDialog').show()" disabled="#{empty approvisionemmentController.selected}"/>
                             <p:commandButton id="deleteButton" icon="ui-icon-trash"  value="Supprimer Approvisionnement" actionListener="#{approvisionemmentController.destroy}" update=":growl,datalist" disabled="#{empty approvisionemmentController.selected}"/>
+                          <p:commandButton actionListener="#{approvisionemmentController.Genererpdf}" value="Envoyer Bon de Livraison" />
+                        
                         </f:facet>
                     </p:dataTable>
                 </p:panel>

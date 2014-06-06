@@ -27,13 +27,18 @@ import com.wide.model.Utilisateur;
 public class LoginBean implements Serializable {
 
    
-    public UtilisateurCtrl getUtilCtrl() {
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+	public UtilisateurCtrl getUtilCtrl() {
 		return utilCtrl;
 	}
 	public void setUtilCtrl(UtilisateurCtrl utilCtrl) {
 		this.utilCtrl = utilCtrl;
 	}
-	private Utilisateur selectedClient =null;
+	public static Utilisateur selectedClient =null;
   
     UtilisateurCtrl utilCtrl = new UtilisateurCtrl();
     private String username;
@@ -126,5 +131,26 @@ public class LoginBean implements Serializable {
     	  FacesContext.getCurrentInstance().addMessage(null, msg);
           context.addCallbackParam("loggedIn", loggedIn);
 }
+	public void deconnect(ActionEvent actionEvent)
+	{
+		 ExternalContext context1 = FacesContext.getCurrentInstance()
+					.getExternalContext(); 
+		
+		   try {
+ 				context1.redirect("../index.xhtml");
+ 				} catch (IOException e) {
+ 					// TODO Auto-generated catch block
+ 					Logger.getLogger(LoginBean.class.getName())
+ 					.info("erreuuur");
+ 				}
+		  
+		        FacesMessage msg = null;
+		      
+			  msg = new FacesMessage(FacesMessage.SEVERITY_INFO,"Deconnection", "Au Revoir");
+			selectedClient=null;
+			username=null;
+			passwd=null;
+		   FacesContext.getCurrentInstance().addMessage(null, msg);
+	}
 	 
 }

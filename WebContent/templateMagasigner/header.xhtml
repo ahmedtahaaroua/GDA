@@ -19,13 +19,14 @@
 	</div>
 	
 </h:form>
+<h:form>
 <p:menubar style="float:right;">
     <p:menuitem>connecté : #{loginBean.selectedClient.nom}  #{loginBean.selectedClient.prenom}</p:menuitem>  
 
-    <p:menuitem value="Déconnecter" url="/index.xhtml" icon="ui-icon ui-icon-close" />
+    <p:menuitem  actionListener="#{loginBean.deconnect}" value="Déconnecter"  icon="ui-icon ui-icon-close" />
     </p:menubar>  
 
-
+</h:form>
 
 </ui:composition>
 
