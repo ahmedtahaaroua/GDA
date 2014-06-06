@@ -1,0 +1,313 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report4" language="groovy" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="65c16893-5fbb-4beb-92a1-6c74ad93064b">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="81"/>
+	<style name="Title" fontName="Arial" fontSize="26" isBold="true" pdfFontName="Helvetica-Bold"/>
+	<style name="SubTitle" forecolor="#666666" fontName="Arial" fontSize="18"/>
+	<style name="Column header" forecolor="#666666" fontName="Arial" fontSize="12" isBold="true"/>
+	<style name="Detail" fontName="Arial" fontSize="12"/>
+	<style name="table">
+		<box>
+			<pen lineWidth="1.0" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table_TH" mode="Opaque" backcolor="#F0F8FF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table_CH" mode="Opaque" backcolor="#BFE1FF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table_TD" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<subDataset name="gda" uuid="164e2e3b-89e3-48d4-a071-3eaf38741090">
+		<parameter name="id" class="java.lang.Integer">
+			<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+		</parameter>
+		<queryString>
+			<![CDATA[SELECT
+     produit.`refProd` AS refProd,
+     produit.`nom_produit` AS produit_nom_produit,
+     produit.`prix_achat` AS produit_prix_achat,
+     produit.`quantite` AS produit_quantite,
+     approvisionemment.`Date_Creation` AS approvisionemment_Date_Creation
+FROM
+     `approvisionemment` approvisionemment INNER JOIN `ligneapprovisionnement` ligneapprovisionnement ON approvisionemment.`id_approvisionnement` = ligneapprovisionnement.`id_approvisionnement`
+     INNER JOIN `produit` produit ON ligneapprovisionnement.`refProd` = produit.`refProd`
+WHERE
+     approvisionemment.`id_approvisionnement` = $P{id}
+]]>
+		</queryString>
+		<field name="refProd" class="java.lang.Integer">
+			<fieldDescription><![CDATA[]]></fieldDescription>
+		</field>
+		<field name="produit_nom_produit" class="java.lang.String"/>
+		<field name="produit_prix_achat" class="java.lang.Float"/>
+		<field name="produit_quantite" class="java.lang.Integer"/>
+		<field name="approvisionemment_Date_Creation" class="java.sql.Timestamp"/>
+	</subDataset>
+	<parameter name="nomR" class="java.lang.String"/>
+	<parameter name="prenomR" class="java.lang.String"/>
+	<parameter name="telR" class="java.lang.String"/>
+	<parameter name="somme" class="java.lang.Double"/>
+	<parameter name="nomM" class="java.lang.String"/>
+	<parameter name="prenomM" class="java.lang.String"/>
+	<parameter name="telM" class="java.lang.String"/>
+	<parameter name="magasin" class="java.lang.String"/>
+	<parameter name="id" class="java.lang.Integer">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[SELECT
+     produit.`refProd` AS refProd,
+     produit.`nom_produit` AS produit_nom_produit,
+     produit.`prix_achat` AS produit_prix_achat,
+     produit.`quantite` AS produit_quantite,
+     approvisionemment.`Date_Creation` AS approvisionemment_Date_Creation
+FROM
+     `approvisionemment` approvisionemment INNER JOIN `ligneapprovisionnement` ligneapprovisionnement ON approvisionemment.`id_approvisionnement` = ligneapprovisionnement.`id_approvisionnement`
+     INNER JOIN `produit` produit ON ligneapprovisionnement.`refProd` = produit.`refProd`
+WHERE
+     approvisionemment.`id_approvisionnement` = $P{id}
+]]>
+	</queryString>
+	<field name="refProd" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="produit_nom_produit" class="java.lang.String"/>
+	<field name="produit_prix_achat" class="java.lang.Float"/>
+	<field name="produit_quantite" class="java.lang.Integer"/>
+	<field name="approvisionemment_Date_Creation" class="java.sql.Timestamp"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="177" splitType="Stretch">
+			<staticText>
+				<reportElement style="Title" x="14" y="11" width="263" height="55" uuid="da0f2303-6b6a-4e75-8a12-b815825b9602"/>
+				<textElement verticalAlignment="Middle">
+					<font size="38" isItalic="true" isUnderline="true"/>
+				</textElement>
+				<text><![CDATA[Bon Livraison]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="71" y="117" width="140" height="20" uuid="984ce5ef-ff05-455e-9f76-a1c4a22035b1"/>
+				<textFieldExpression><![CDATA[$P{nomR}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="71" y="137" width="140" height="20" uuid="410497c4-b091-4a91-8ddb-108784c84012"/>
+				<textFieldExpression><![CDATA[$P{prenomR}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="71" y="157" width="140" height="20" uuid="c1eac355-11e4-4807-b673-2742c509a64b"/>
+				<textFieldExpression><![CDATA[$P{telR}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement style="SubTitle" x="0" y="97" width="121" height="20" uuid="62f30f6c-2abc-476b-bf40-e3c7ca9bc127"/>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Responsable Depot :]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="SubTitle" x="0" y="137" width="57" height="20" uuid="1ad88f96-82bc-4b39-853d-e33ebf775f04"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<text><![CDATA[Prenom :]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="SubTitle" x="0" y="157" width="45" height="20" uuid="1d08f6e1-68c3-431f-8dce-7fb437612540"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<text><![CDATA[Tel :]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="SubTitle" x="0" y="117" width="57" height="20" uuid="e7d0ab0c-9873-4ca7-8233-0e813878ee25"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<text><![CDATA[Nom :]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="SubTitle" x="313" y="97" width="121" height="20" uuid="339b4683-3f99-46b7-af66-3e21278c2fa1"/>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Magasigner:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="SubTitle" x="313" y="117" width="57" height="20" uuid="2df4777a-d240-4548-8c51-d07980df741f"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<text><![CDATA[Nom :]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="SubTitle" x="313" y="137" width="57" height="20" uuid="924c87cd-72d2-48f0-b78c-3fb70b1172fe"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<text><![CDATA[Prenom :]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="SubTitle" x="313" y="157" width="45" height="20" uuid="25f64c6b-0e0b-4893-afac-897d34e8f924"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<text><![CDATA[Tel :]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="373" y="117" width="140" height="20" uuid="891621a6-aea7-4ffc-ac0e-6c749edec4bc"/>
+				<textFieldExpression><![CDATA[$P{nomM}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="373" y="137" width="140" height="20" uuid="1e0acef6-3916-41c4-8b69-a2783e19d77e"/>
+				<textFieldExpression><![CDATA[$P{prenomM}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="373" y="157" width="140" height="20" uuid="c66e892b-9bc0-49c6-940b-b3c97b8e6da4"/>
+				<textFieldExpression><![CDATA[$P{telM}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement style="SubTitle" x="332" y="11" width="60" height="20" uuid="61e2ccb6-8c47-487f-a71a-2e7550f754e6"/>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Magasin : ]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="392" y="11" width="140" height="20" uuid="5b4f740a-ffc5-4fdc-83d0-f04e2a4d16a3"/>
+				<textFieldExpression><![CDATA[$P{magasin}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="1" y="0" width="210" height="20" uuid="10e070bb-90b1-41c7-95c1-ea27c6a84ed3"/>
+				<textFieldExpression><![CDATA[$F{approvisionemment_Date_Creation}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="232" y="66" width="100" height="20" uuid="19474d39-0d1b-46d6-9b40-9ca75ab54923"/>
+				<textFieldExpression><![CDATA[$P{id}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement style="SubTitle" x="179" y="66" width="57" height="20" uuid="fb75ca3b-7e3c-497d-95a9-9c1a1ed301ad"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<text><![CDATA[Numéro]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="76" splitType="Stretch">
+			<line>
+				<reportElement positionType="FixRelativeToBottom" x="0" y="35" width="555" height="1" uuid="5f394864-bad6-488d-adb7-cb2cd3a7e8d9"/>
+				<graphicElement>
+					<pen lineWidth="0.5" lineColor="#999999"/>
+				</graphicElement>
+			</line>
+			<staticText>
+				<reportElement style="SubTitle" x="0" y="56" width="100" height="20" uuid="1d8f2d16-ffc9-49b5-b2f8-115f2144f012"/>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Reference]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="SubTitle" x="100" y="56" width="100" height="20" uuid="980d4163-fb4b-42d1-948c-b104f99fc877"/>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Nom Produit]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="SubTitle" x="295" y="56" width="100" height="20" uuid="6387341f-fda2-4c10-9531-c4b316535ad6"/>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Prix]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="SubTitle" x="433" y="56" width="100" height="20" uuid="531fb841-a954-4218-a1b7-d896c3813b4e"/>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Quantité]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="42" splitType="Stretch">
+			<textField>
+				<reportElement x="0" y="22" width="100" height="20" uuid="30df85c6-1287-4fbd-93d8-38bead938a9c"/>
+				<textFieldExpression><![CDATA[$F{refProd}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="100" y="22" width="136" height="20" uuid="2f2c8bac-b531-4845-a8c1-a437a4944177"/>
+				<textFieldExpression><![CDATA[$F{produit_nom_produit}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="295" y="22" width="122" height="20" uuid="c0d2ebf9-033e-49bb-b6ea-9d36fcd4d2b6"/>
+				<textFieldExpression><![CDATA[$F{produit_prix_achat}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="435" y="22" width="100" height="20" uuid="eaa389e5-78b1-4079-9930-dfc1efa4bed5"/>
+				<textFieldExpression><![CDATA[$F{produit_quantite}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="45" splitType="Stretch">
+			<line>
+				<reportElement positionType="FixRelativeToBottom" x="0" y="3" width="555" height="1" uuid="809ce99b-b9e5-4ace-8b3b-02dab24c2d79"/>
+				<graphicElement>
+					<pen lineWidth="0.5" lineColor="#999999"/>
+				</graphicElement>
+			</line>
+			<line>
+				<reportElement positionType="FixRelativeToBottom" x="0" y="7" width="534" height="16" uuid="40605884-548f-4206-9d61-20d028b75882"/>
+				<graphicElement>
+					<pen lineWidth="0.5" lineColor="#999999"/>
+				</graphicElement>
+			</line>
+		</band>
+	</columnFooter>
+	<pageFooter>
+		<band height="74" splitType="Stretch">
+			<textField>
+				<reportElement style="Column header" x="433" y="0" width="80" height="20" uuid="0610a031-c57e-4a95-85d0-c5da048659b9"/>
+				<textElement textAlignment="Right">
+					<font size="10" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Page "+$V{PAGE_NUMBER}+" of"]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement style="Column header" x="513" y="0" width="40" height="20" uuid="fc10798b-e4ea-459e-965d-6f73952ff7d9"/>
+				<textElement>
+					<font size="10" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<textField pattern="EEEEE dd MMMMM yyyy">
+				<reportElement style="Column header" x="0" y="0" width="197" height="20" uuid="e1f07d11-8aae-4f4b-a4f8-c39387e8580c"/>
+				<textElement>
+					<font size="10" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+	<summary>
+		<band splitType="Stretch"/>
+	</summary>
+</jasperReport>
