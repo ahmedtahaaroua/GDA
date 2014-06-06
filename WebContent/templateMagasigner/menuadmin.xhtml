@@ -4,41 +4,43 @@
 <ui:composition xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:p="http://primefaces.org/ui"
-	xmlns:f="http://java.sun.com/jsf/core"
-	>
+	xmlns:f="http://java.sun.com/jsf/core">
 
-<h:form>  
-              
-    <p:growl id="messages" autoUpdate="true"/>  
-  
-    <p:panelMenu style="width:800%; ">  
-       
-        <p:submenu label="Gestion des Approvisionnements">  
-             <p:menuitem value="Ajouter Quantite"  outcome="/magasinproduit/List"  icon="ui-icon-home"  />  
-     <p:menuitem value="Ajouter Produit"  outcome="/produit/ListMagasin"  icon="ui-icon-home"  />  
-              
-        </p:submenu>
+	<h:form>
 
-            
-            
-              <p:submenu label="Gestion des Livraisons" >  
-                  <p:menuitem value="Consulter Livraison"  outcome="/livraisonmagasin/List"  icon="ui-icon-home"  />  
+		<p:growl id="messages" autoUpdate="true" />
 
-            </p:submenu>
-             <p:submenu label="Gestion des Magasins " >  
-                    
-            </p:submenu>
-           
-           
-           
-              
-              
-               
-                        
-                      
-                   
-    </p:panelMenu>  
-  
-</h:form>
+		<p:panelMenu style="width:800%; ">
+
+			<p:submenu label="Gestion des Approvisionnements">
+				<p:menuitem value="Ajouter Quantite" outcome="/magasinproduit/List"
+					icon="ui-icon-home" />
+				<p:menuitem value="Ajouter Produit" outcome="/produit/ListMagasin"
+					icon="ui-icon-home" />
+
+			</p:submenu>
+
+
+
+			<p:submenu label="Gestion des Livraisons">
+				<p:menuitem value="Consulter Livraison"
+					outcome="/livraisonmagasin/List" icon="ui-icon-home" />
+
+			</p:submenu>
+			<p:submenu label="Gestion des Magasins ">
+
+			</p:submenu>
+
+
+
+
+
+
+
+
+
+		</p:panelMenu>
+
+	</h:form>
 </ui:composition>
 
