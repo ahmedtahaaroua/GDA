@@ -78,7 +78,7 @@ public class LoginBean implements Serializable {
             	   {
             		   System.out.println("admin");
             		   try {
-           				context1.redirect("template/indexAdmin.xhtml");
+           				context1.redirect("http://localhost:8080/aaaaaaa/utilisateur/List.xhtml");
            				} catch (IOException e) {
            					// TODO Auto-generated catch block
            					Logger.getLogger(LoginBean.class.getName())

@@ -12,9 +12,13 @@ import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import javax.faces.convert.FacesConverter;
+import javax.faces.model.DataModel;
+import javax.faces.model.ListDataModel;
+import javax.faces.model.SelectItem;
 import javax.inject.Named;
 
 import com.wide.dao.MagasinFacade;
+import com.wide.dao.UtilisateurFacade;
 import com.wide.jpaUtil.JsfUtil;
 import com.wide.jpaUtil.JsfUtil.PersistAction;
 import com.wide.model.Magasin;
@@ -25,9 +29,16 @@ public class MagasinController implements Serializable {
 
     private MagasinFacade ejbFacade;
     private List<Magasin> items = null;
-    private Magasin selected;
-
+    private Magasin selected=new Magasin();
+    private DataModel utilisateurs;
+	private List<SelectItem> UtilisateurItems;
     public MagasinController() {
+    	ejbFacade=new MagasinFacade();
+    	if (items == null) {
+			utilisateurs = new ListDataModel();
+			utilisateurs.setWrappedData(ejbFacade.findAll());
+
+		}
     }
 
     public Magasin getSelected() {
