@@ -14,7 +14,10 @@ import javax.faces.convert.Converter;
 import javax.faces.convert.FacesConverter;
 import javax.faces.model.DataModel;
 import javax.faces.model.ListDataModel;
+
 import javax.faces.model.SelectItem;
+
+
 import javax.inject.Named;
 
 import com.wide.dao.MagasinFacade;
@@ -29,19 +32,25 @@ public class MagasinController implements Serializable {
 
     private MagasinFacade ejbFacade;
     private List<Magasin> items = null;
-    private Magasin selected=new Magasin();
-    private DataModel utilisateurs;
-	private List<SelectItem> UtilisateurItems;
+
+    private Magasin selected;
+    private DataModel magasins;
+    
     public MagasinController() {
     	ejbFacade=new MagasinFacade();
     	if (items == null) {
-			utilisateurs = new ListDataModel();
-			utilisateurs.setWrappedData(ejbFacade.findAll());
+			magasins = new ListDataModel();
+			magasins.setWrappedData(ejbFacade.findAll());
+
 
 		}
     }
 
-    public Magasin getSelected() {
+    public void setItems(List<Magasin> items) {
+		this.items = items;
+	}
+
+	public Magasin getSelected() {
         return selected;
     }
 
@@ -70,6 +79,7 @@ public class MagasinController implements Serializable {
         if (!JsfUtil.isValidationFailed()) {
             items = null;    // Invalidate list of items to trigger re-query.
         }
+        magasins.setWrappedData(ejbFacade.findAll());
     }
 
     public void update() {
@@ -86,6 +96,7 @@ public class MagasinController implements Serializable {
 
     public List<Magasin> getItems() {
         if (items == null) {
+
             items = getFacade().findAll();
         }
         return items;

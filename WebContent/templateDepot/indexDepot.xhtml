@@ -14,7 +14,12 @@
 
         <ui:define name="body">
         
-       
+       <p:selectOneMenu value="#{magasinController.selected.idMagasin}">
+				<f:selectItems id="item"
+					value="#{magasinController.items}" var="c"
+					itemLabel="#{c.nomMagasin}" itemValue="#{c.idMagasin}" />
+					<p:ajax update="in_text" />  
+			</p:selectOneMenu>
         
         
           responsable depot
