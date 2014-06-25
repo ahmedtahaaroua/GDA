@@ -13,9 +13,12 @@ import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import javax.faces.convert.FacesConverter;
+import javax.faces.model.DataModel;
+import javax.faces.model.ListDataModel;
 import javax.inject.Named;
 
 import com.wide.dao.CommandeFacade;
+import com.wide.dao.FamilleFacade;
 import com.wide.jpaUtil.JsfUtil;
 import com.wide.jpaUtil.JsfUtil.PersistAction;
 import com.wide.model.Commande;
@@ -27,8 +30,15 @@ public class CommandeController implements Serializable {
     private CommandeFacade ejbFacade;
     private List<Commande> items = null;
     private Commande selected;
-
+    private DataModel commandes;
+    
     public CommandeController() {
+    	ejbFacade=new CommandeFacade();
+    	if (items == null) {
+    		commandes = new ListDataModel();
+    		commandes.setWrappedData(ejbFacade.findAll());
+
+		}
     }
 
     public Commande getSelected() {
@@ -60,6 +70,7 @@ public class CommandeController implements Serializable {
         if (!JsfUtil.isValidationFailed()) {
             items = null;    // Invalidate list of items to trigger re-query.
         }
+        commandes.setWrappedData(ejbFacade.findAll());
     }
 
     public void update() {

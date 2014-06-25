@@ -12,8 +12,11 @@ import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import javax.faces.convert.FacesConverter;
+import javax.faces.model.DataModel;
+import javax.faces.model.ListDataModel;
 import javax.inject.Named;
 
+import com.wide.dao.FamilleFacade;
 import com.wide.dao.LigneCommandeFacade;
 import com.wide.jpaUtil.JsfUtil;
 import com.wide.jpaUtil.JsfUtil.PersistAction;
@@ -26,10 +29,23 @@ public class LigneCommandeController implements Serializable {
     private LigneCommandeFacade ejbFacade;
     private List<LigneCommande> items = null;
     private LigneCommande selected;
-
+    private DataModel lignesc;
     public LigneCommandeController() {
+    	ejbFacade=new LigneCommandeFacade();
+    	if (items == null) {
+    		lignesc = new ListDataModel();
+    		lignesc.setWrappedData(ejbFacade.findAll());
+
+		}
+    	
     }
 
+public List<LigneCommande> findByCommand (int idcmd){
+    	
+    	
+    	return null;
+    }
+    
     public LigneCommande getSelected() {
         return selected;
     }
@@ -59,6 +75,7 @@ public class LigneCommandeController implements Serializable {
         if (!JsfUtil.isValidationFailed()) {
             items = null;    // Invalidate list of items to trigger re-query.
         }
+       lignesc.setWrappedData(ejbFacade.findAll());
     }
 
     public void update() {

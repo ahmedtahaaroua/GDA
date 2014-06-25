@@ -12,9 +12,12 @@ import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import javax.faces.convert.FacesConverter;
+import javax.faces.model.DataModel;
+import javax.faces.model.ListDataModel;
 import javax.inject.Named;
 
 import com.wide.dao.ProduitFacade;
+import com.wide.dao.UtilisateurFacade;
 import com.wide.jpaUtil.JsfUtil;
 import com.wide.jpaUtil.JsfUtil.PersistAction;
 import com.wide.model.Produit;
@@ -26,8 +29,14 @@ public class ProduitController implements Serializable {
     private ProduitFacade ejbFacade;
     private List<Produit> items = null;
     private Produit selected;
-
+    private DataModel produits;
     public ProduitController() {
+    	ejbFacade=new ProduitFacade();
+    	if (items == null) {
+    		produits = new ListDataModel();
+    		produits.setWrappedData(ejbFacade.findAll());
+
+		}
     }
 
     public Produit getSelected() {
@@ -59,6 +68,7 @@ public class ProduitController implements Serializable {
         if (!JsfUtil.isValidationFailed()) {
             items = null;    // Invalidate list of items to trigger re-query.
         }
+       produits.setWrappedData(ejbFacade.findAll());
     }
 
     public void update() {

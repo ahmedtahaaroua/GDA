@@ -99,7 +99,7 @@ public class Famille implements Serializable {
 
     @Override
     public String toString() {
-        return "tn.fitness.gda.Famille[ idFamille=" + idFamille + " ]";
+        return nomFamille;
     }
     
 }

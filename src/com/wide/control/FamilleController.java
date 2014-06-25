@@ -11,9 +11,12 @@ import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import javax.faces.convert.FacesConverter;
+import javax.faces.model.DataModel;
+import javax.faces.model.ListDataModel;
 import javax.inject.Named;
 
 import com.wide.dao.FamilleFacade;
+import com.wide.dao.MagasinFacade;
 import com.wide.jpaUtil.JsfUtil;
 import com.wide.jpaUtil.JsfUtil.PersistAction;
 import com.wide.model.Famille;
@@ -25,8 +28,16 @@ public class FamilleController implements Serializable {
     private FamilleFacade ejbFacade;
     private List<Famille> items = null;
     private Famille selected;
+    private DataModel familles;
 
     public FamilleController() {
+    	ejbFacade=new FamilleFacade();
+    	if (items == null) {
+    		familles = new ListDataModel();
+    		familles.setWrappedData(ejbFacade.findAll());
+
+		}
+    	
     }
 
     public Famille getSelected() {
@@ -58,6 +69,7 @@ public class FamilleController implements Serializable {
         if (!JsfUtil.isValidationFailed()) {
             items = null;    // Invalidate list of items to trigger re-query.
         }
+       familles.setWrappedData(ejbFacade.findAll());
     }
 
     public void update() {

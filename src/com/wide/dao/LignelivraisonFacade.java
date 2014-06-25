@@ -5,10 +5,13 @@
  */
 
 package com.wide.dao;
+import java.util.List;
+
 import javax.persistence.EntityManager;
 import javax.persistence.Persistence;
 import javax.persistence.PersistenceContext;
 
+import com.wide.model.LigneCommande;
 import com.wide.model.Lignelivraison;
 
 /**
@@ -30,5 +33,6 @@ public class LignelivraisonFacade extends AbstractFacade<Lignelivraison> {
     public LignelivraisonFacade() {
         super(Lignelivraison.class);
     }
+    
     
 }
