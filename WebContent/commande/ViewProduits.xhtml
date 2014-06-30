@@ -6,9 +6,22 @@
       xmlns:f="http://xmlns.jcp.org/jsf/core"
       xmlns:p="http://primefaces.org/ui">
 
-    <ui:composition>
+ <ui:composition template="../templateDepot/template.xhtml">
 
-        <p:dialog id="CommandeViewDlg" widgetVar="CommandeViewDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.ViewCommandeTitle}">
+
+<h:form id="CommandeViewForm">
+ 
+    <p:ring id="basic" value="#{commandeController.items}" var="cmd">
+        <p:outputPanel style="text-align: center;" layout="block">
+            #{cmd.idCommande}
+            <br />
+            <p:commandButton update=":CommandeViewForm:CommandeViewDlg" icon="ui-icon-search" title="View" oncomplete="PF('CommandeViewDialog').show();">
+                <f:setPropertyActionListener value="#{cmd}" target="#{commandeController.selected}" />
+            </p:commandButton>
+        </p:outputPanel>
+    </p:ring>
+ 
+         <p:dialog id="CommandeViewDlg" widgetVar="CommandeViewDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.ViewCommandeTitle}">
             <h:form id="CommandeViewForm">
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{commandeController.selected != null}">
@@ -28,7 +41,9 @@
                     <p:commandButton value="#{bundle.Close}" onclick="CommandeViewDialog.hide()"/>
                 </h:panelGroup>
             </h:form>
-        </p:dialog>
+        </p:dialog> 
+</h:form>
+
 
     </ui:composition>
 </html>
