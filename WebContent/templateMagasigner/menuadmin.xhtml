@@ -14,23 +14,20 @@
     <p:panelMenu style="width:800%; ">  
        
         <p:submenu label="Gestion des Approvisionnements">  
-             <p:menuitem value="Ajouter Quantité"  outcome="../produit/List"  icon="ui-icon-home"  />  
-            			 <p:menuitem value="Ajouter Produits"  outcome="../produit/List"  icon="ui-icon-home"  />  
-                           
+             <p:menuitem value="Ajouter Quantite"  outcome="/magasinproduit/List"  icon="ui-icon-home"  />  
+     <p:menuitem value="Ajouter Produit"  outcome="/produit/ListMagasin"  icon="ui-icon-home"  />  
+              
         </p:submenu>
             
-             <p:submenu label="Gestion des Transfert" >  
-                    
-            </p:submenu>
+            
               <p:submenu label="Gestion des Livraisons" >  
+                  <p:menuitem value="Consulter Livraison"  outcome="/livraisonmagasin/List"  icon="ui-icon-home"  />  
                     
             </p:submenu>
              <p:submenu label="Gestion des Magasins" >  
                     
             </p:submenu>
-            <p:submenu label="Total" >  
-                    
-            </p:submenu>
+           
            
            
               

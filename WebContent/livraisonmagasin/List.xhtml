@@ -6,7 +6,7 @@
       xmlns:f="http://xmlns.jcp.org/jsf/core"
       xmlns:p="http://primefaces.org/ui">
 
-    <ui:composition template="/template.xhtml">
+    <ui:composition template="../templateMagasigner/indexMagasigner.xhtml">
 
 
         <ui:define name="title">
@@ -14,52 +14,46 @@
         </ui:define>
 
         <ui:define name="body">
-            <h:form id="LivraisonmagasinListForm">
-                <p:panel header="#{bundle.ListLivraisonmagasinTitle}">
-                    <p:dataTable id="datalist" value="#{livraisonmagasinController.items}" var="item"
-                                 selectionMode="single" selection="#{livraisonmagasinController.selected}"
-                                 paginator="true"
-                                 rowKey="#{item.idLivraisonMagasin}"
-                                 rows="10"
-                                 rowsPerPageTemplate="10,20,30,40,50"
-                                 >
+           <h:form id="form">
+		<p:ring id="basic" value="#{livraisonmagasinController.items}" var="livraisonmagasin">
+			<p:outputPanel style="text-align: center;" layout="block">
+            N ° Livraison : #{livraisonmagasin.idLivraisonMagasin}
+            <br />
+				<p:commandButton update=":form:form2"
+					icon="ui-icon-search" title="View"
+					oncomplete="PF('livraisonmagasinMagasinViewDialog').show();">
+					<f:setPropertyActionListener value="#{livraisonmagasin}"
+						target="#{livraisonmagasinController.selected}" />
+				</p:commandButton>
+			</p:outputPanel>
+		</p:ring>
+		<p:dialog appendToBody="true" header="Information du Livraison" widgetVar="livraisonmagasinMagasinViewDialog"
+			modal="true" showEffect="fade" hideEffect="fade" resizable="false"
+			width="250">
+			
+				 <h:form id="form2">
+                <h:panelGroup id="display">
+				<p:panelGrid columns="2"
+					rendered="#{not empty livraisonmagasinController.selected}"
+					columnClasses="value">
 
-                        <p:ajax event="rowSelect"   update="createButton viewButton editButton deleteButton"/>
-                        <p:ajax event="rowUnselect" update="createButton viewButton editButton deleteButton"/>
 
-                        <p:column>
-                            <f:facet name="header">
-                                <h:outputText value="#{bundle.ListLivraisonmagasinTitle_idLivraisonMagasin}"/>
-                            </f:facet>
-                            <h:outputText value="#{item.idLivraisonMagasin}"/>
-                        </p:column>
-                        <p:column>
-                            <f:facet name="header">
-                                <h:outputText value="#{bundle.ListLivraisonmagasinTitle_dateLivraison}"/>
-                            </f:facet>
-                            <h:outputText value="#{item.dateLivraison}">
-                                <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
-                            </h:outputText>
-                        </p:column>
-                        <p:column>
-                            <f:facet name="header">
-                                <h:outputText value="#{bundle.ListLivraisonmagasinTitle_idMagasin}"/>
-                            </f:facet>
-                            <h:outputText value="#{item.idMagasin}"/>
-                        </p:column>
-                        <f:facet name="footer">
-                            <p:commandButton id="createButton" icon="ui-icon-plus"   value="#{bundle.Create}" actionListener="#{livraisonmagasinController.prepareCreate}" update=":LivraisonmagasinCreateForm" oncomplete="PF('LivraisonmagasinCreateDialog').show()"/>
-                            <p:commandButton id="viewButton"   icon="ui-icon-search" value="#{bundle.View}" update=":LivraisonmagasinViewForm" oncomplete="PF('LivraisonmagasinViewDialog').show()" disabled="#{empty livraisonmagasinController.selected}"/>
-                            <p:commandButton id="editButton"   icon="ui-icon-pencil" value="#{bundle.Edit}" update=":LivraisonmagasinEditForm" oncomplete="PF('LivraisonmagasinEditDialog').show()" disabled="#{empty livraisonmagasinController.selected}"/>
-                            <p:commandButton id="deleteButton" icon="ui-icon-trash"  value="#{bundle.Delete}" actionListener="#{livraisonmagasinController.destroy}" update=":growl,datalist" disabled="#{empty livraisonmagasinController.selected}"/>
-                        </f:facet>
-                    </p:dataTable>
-                </p:panel>
-            </h:form>
-
-            <ui:include src="Create.xhtml"/>
-            <ui:include src="Edit.xhtml"/>
-            <ui:include src="View.xhtml"/>
+						<h:outputText value="Ref Livraison" />
+						<h:outputText value="#{livraisonmagasinController.selected.idLivraisonMagasin}" />
+                        <h:outputText value="Magasin"/>
+                        <h:outputText value="#{livraisonmagasinController.selected.idMagasin.nomMagasin}" title="#{bundle.ViewProduitTitle_quantite}"/>
+               			<h:outputText value="Produits"/>
+               			 <p:selectOneMenu id="produits" value="#{livraisonmagasinController.produit}" required="false" requiredMessage="#{bundle.EditProduitRequiredMessage_idFamille}">
+                            <f:selectItems value="#{livraisonmagasinController.produits}"
+                                           var="idFamilleItem"
+                                           itemValue="#{idFamilleItem}"/>
+                        </p:selectOneMenu>
+                        
+				</p:panelGrid>
+			</h:panelGroup>
+			</h:form>
+		</p:dialog>
+		</h:form>
         </ui:define>
     </ui:composition>
 

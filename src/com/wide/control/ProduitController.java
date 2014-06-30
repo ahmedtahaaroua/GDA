@@ -1,25 +1,36 @@
 package com.wide.control;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import javax.ejb.EJB;
 import javax.ejb.EJBException;
 import javax.enterprise.context.SessionScoped;
+import javax.faces.application.FacesMessage;
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import javax.faces.convert.FacesConverter;
+import javax.faces.event.ActionEvent;
 import javax.faces.model.DataModel;
 import javax.faces.model.ListDataModel;
 import javax.inject.Named;
 
+import org.primefaces.context.RequestContext;
+
+import com.wide.dao.ApprovisionemmentFacade;
+import com.wide.dao.LigneapprovisionnementFacade;
+import com.wide.dao.MagasinFacade;
+import com.wide.dao.MagasinproduitFacade;
 import com.wide.dao.ProduitFacade;
-import com.wide.dao.UtilisateurFacade;
 import com.wide.jpaUtil.JsfUtil;
 import com.wide.jpaUtil.JsfUtil.PersistAction;
+import com.wide.model.Approvisionemment;
+import com.wide.model.Ligneapprovisionnement;
+import com.wide.model.Magasin;
+import com.wide.model.Magasinproduit;
 import com.wide.model.Produit;
 
 @Named("produitController")
@@ -30,15 +41,114 @@ public class ProduitController implements Serializable {
     private List<Produit> items = null;
     private Produit selected;
     private DataModel produits;
-    public ProduitController() {
+    private MagasinproduitFacade magasinproduitFacade;
+    List<Produit> produitsStock=null;
+   
+	private ApprovisionemmentFacade approvisionemmentFacade;
+	private LigneapprovisionnementFacade ligneapprovisionnementFacade;
+    private List<Magasin> magasins=new ArrayList<Magasin>();
+    private MagasinFacade magasinFacade;
+    private int qte=0;
+    private Magasin magasin;
+    
+    public Magasin getMagasin() {
+		return magasin;
+	}
+
+	public void setMagasin(Magasin magasin) {
+		this.magasin = magasin;
+	}
+
+	public int getQte() {
+		return qte;
+	}
+
+	public void setQte(int qte) {
+		this.qte = qte;
+	}
+
+	public List<Magasin> getMagasins() 
+    
+    {
+    	magasins=new ArrayList<Magasin>();
+    	magasinFacade=new MagasinFacade();
+    	List<Magasin> list=new ArrayList<Magasin>();
+    	list=magasinFacade.findAll();
+    	boolean ok=true;
+    	for(Magasin magasin:list){
+    		ok=true;
+    		for(Magasinproduit magasinproduit:magasin.getMagasinproduitCollection()){
+    			if(magasinproduit.getRefProd().getRefProd()==selected.getRefProd()){
+    				ok=false;
+    				break;
+    			}
+    		}
+    		if(ok){
+    			magasins.add(magasin);
+    		}
+    	}
+    	
+    	return magasins;
+	}
+
+	public void setMagasins(List<Magasin> magasins) {
+		this.magasins = magasins;
+	}
+
+	
+
+	public ProduitController() {
     	ejbFacade=new ProduitFacade();
-    	if (items == null) {
+    	magasinproduitFacade=new MagasinproduitFacade();
+    	List<Produit> produits1=new ArrayList<Produit>();
+    	List<Magasinproduit> magasinproduits=new ArrayList<Magasinproduit>();
+    	 produitsStock=new ArrayList<Produit>();
     		produits = new ListDataModel();
-    		produits.setWrappedData(ejbFacade.findAll());
+    		produits1=ejbFacade.findAll();
+    		magasinproduits=magasinproduitFacade.findAll();
+    		boolean ok =true;
+    		for(Produit produit : produits1){
+    			for (Magasinproduit magasinproduit:magasinproduits){
+    				
+    				if(produit.getRefProd()== magasinproduit.getRefProd().getRefProd()){
+    					ok=false;
+    					break;
+    				}
+    			
+    			}
+    			if(ok){
+    				
+    				produitsStock.add(produit);
+    			}else{
+    				ok=true;
+    			}
+    		}
+    		
+    		produits.setWrappedData(produitsStock);
 
-		}
+		
     }
+	public void createApprovisionnement() {
+		System.out.println("jhjhjh");
+        RequestContext context = RequestContext.getCurrentInstance();
+		 FacesMessage msg = null;
+		approvisionemmentFacade = new ApprovisionemmentFacade();
+		ligneapprovisionnementFacade = new LigneapprovisionnementFacade();
+		Approvisionemment approvisionemment = new Approvisionemment();
+//		approvisionemment.setIdMagasin(this.selected.getIdMagasin());
+		approvisionemment.setValidee(false);
+		approvisionemmentFacade.create(approvisionemment);
+		Ligneapprovisionnement ligneapprovisionnement = new Ligneapprovisionnement();
+		ligneapprovisionnement.setRefProd(this.selected);
+		ligneapprovisionnement.setIdApprovisionnement(approvisionemment);
+		ligneapprovisionnement.setQteApp(qte);
+		ligneapprovisionnementFacade.create(ligneapprovisionnement);
+		qte=0;
+		msg=new FacesMessage(FacesMessage.SEVERITY_INFO, "Demande Envoyé", "Votre demande d'approvisionnement est envoyé avec succes au chef depot");
+		 FacesContext.getCurrentInstance().addMessage(null, msg);
+         context.addCallbackParam("loggedIn", false);
 
+	}
     public Produit getSelected() {
         return selected;
     }
@@ -59,6 +169,7 @@ public class ProduitController implements Serializable {
 
     public Produit prepareCreate() {
         selected = new Produit();
+        
         initializeEmbeddableKey();
         return selected;
     }
@@ -85,7 +196,7 @@ public class ProduitController implements Serializable {
 
     public List<Produit> getItems() {
         if (items == null) {
-            items = getFacade().findAll();
+            items = ejbFacade.findAll();
         }
         return items;
     }

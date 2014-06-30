@@ -12,12 +12,20 @@ import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import javax.faces.convert.FacesConverter;
+import javax.faces.model.DataModel;
+import javax.faces.model.ListDataModel;
 import javax.inject.Named;
 
+import com.wide.dao.LignelivraisonFacade;
+import com.wide.dao.LignelivraisonmagasinFacade;
 import com.wide.dao.LivraisonmagasinFacade;
+import com.wide.dao.MagasinFacade;
 import com.wide.jpaUtil.JsfUtil;
 import com.wide.jpaUtil.JsfUtil.PersistAction;
+import com.wide.model.Lignelivraison;
+import com.wide.model.Lignelivraisonmagasin;
 import com.wide.model.Livraisonmagasin;
+import com.wide.model.Produit;
 
 @Named("livraisonmagasinController")
 @SessionScoped
@@ -26,8 +34,43 @@ public class LivraisonmagasinController implements Serializable {
     private LivraisonmagasinFacade ejbFacade;
     private List<Livraisonmagasin> items = null;
     private Livraisonmagasin selected;
+    private DataModel livraisons;
+    Produit produit;
+    List<Produit> produits;
+    
+    public List<Produit> getProduits() {
+    	LignelivraisonmagasinFacade lignelivraisonFacade=new LignelivraisonmagasinFacade();
+    	List<Lignelivraisonmagasin> lignelivraisons=lignelivraisonFacade.findAll();
+    	for(Lignelivraisonmagasin lignelivraison:lignelivraisons){
+    		if(selected.getIdLivraisonMagasin()== lignelivraison.getIdLivraisonMagasin().getIdLivraisonMagasin()){
+    			produits.add(lignelivraison.getRefProduit());
+    		}
+    	}
+    	
+    	
+		return produits;
+	}
 
-    public LivraisonmagasinController() {
+	public void setProduits(List<Produit> produits) {
+		this.produits = produits;
+	}
+
+	public Produit getProduit() {
+		return produit;
+	}
+
+	public void setProduit(Produit produit) {
+		this.produit = produit;
+	}
+
+	public LivraisonmagasinController() {
+    	ejbFacade=new LivraisonmagasinFacade();
+    	
+    		livraisons = new ListDataModel();
+    		livraisons.setWrappedData(ejbFacade.findAll());
+
+
+		
     }
 
     public Livraisonmagasin getSelected() {
@@ -74,9 +117,9 @@ public class LivraisonmagasinController implements Serializable {
     }
 
     public List<Livraisonmagasin> getItems() {
-        if (items == null) {
+       
             items = getFacade().findAll();
-        }
+        
         return items;
     }
 
