@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+<ui:composition template="../templateMagasigner/indexMagasigner.xhtml">
+
+
+	<ui:define name="title">
+		<h:outputText value="#{bundle.ListProduitTitle}"></h:outputText>
+
+
+	</ui:define>
+
+	<ui:define name="body">
+	<h:form id="form">
+		<p:ring id="basic" value="#{produitController.items}" var="produit">
+			<p:outputPanel style="text-align: center;" layout="block">
+            #{produit.nomProduit}
+            <br />
+				<p:commandButton update=":form:form2"
+					icon="ui-icon-search" title="View"
+					oncomplete="PF('ProduitMagasinViewDialog').show();">
+					<f:setPropertyActionListener value="#{produit}"
+						target="#{produitController.selected}" />
+				</p:commandButton>
+			</p:outputPanel>
+		</p:ring>
+		<p:dialog appendToBody="true" header="Information du produit" widgetVar="ProduitMagasinViewDialog"
+			modal="true" showEffect="fade" hideEffect="fade" resizable="false"
+			width="250">
+			
+				 <h:form id="form2">
+                <h:panelGroup id="display">
+				<p:panelGrid columns="2"
+					rendered="#{not empty produitController.selected}"
+					columnClasses="value">
+
+
+					<h:outputText value="Nom produit :" />
+					<h:outputText value="#{produitController.selected.nomProduit}" />
+                        <h:outputText value="Quantité"/>
+                        <h:inputText value="#{produitController.qte}" title="#{bundle.ViewProduitTitle_quantite}"/>
+                        <h:outputText value="#{bundle.ViewProduitLabel_prixAchat}"/>
+                        <h:outputText value="#{produitController.selected.prixAchat}" title="#{bundle.ViewProduitTitle_prixAchat}"/>
+                        <h:outputText value="Famille"/>
+                        <h:outputText value="#{produitController.selected.idFamille.nomFamille}" title="#{bundle.ViewProduitTitle_idFamille}"/>
+               			<h:outputText value="Magasin"/>
+               			 <p:selectOneMenu id="magasins" value="#{produitController.magasin}" required="false" requiredMessage="#{bundle.EditProduitRequiredMessage_idFamille}">
+                            <f:selectItems value="#{produitController.magasins}"
+                                           var="idFamilleItem"
+                                           itemValue="#{idFamilleItem}"/>
+                        </p:selectOneMenu>
+                        
+				</p:panelGrid>
+				 <p:commandButton actionListener="#{produitController.createApprovisionnement}" value="Envoye demande d'approvisionnement"  update="display,:form:form2,:growl" oncomplete="handleSubmit(args, 'ProduitMagasinViewDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="ProduitMagasinViewDialog.hide()"/>
+			</h:panelGroup>
+			</h:form>
+		</p:dialog>
+		</h:form>
+		 
+	</ui:define>
+</ui:composition>
+
+</html>
