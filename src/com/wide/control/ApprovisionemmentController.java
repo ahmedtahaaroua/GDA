@@ -23,6 +23,7 @@ import javax.inject.Named;
 
 import com.wide.dao.ApprovisionemmentFacade;
 import com.wide.dao.FamilleFacade;
+import com.wide.dao.LigneapprovisionnementFacade;
 import com.wide.dao.LignelivraisonFacade;
 import com.wide.dao.LignelivraisonmagasinFacade;
 import com.wide.dao.LivraisonmagasinFacade;
@@ -103,6 +104,7 @@ public class ApprovisionemmentController implements Serializable {
 
     public void update() {
     	
+
     	LivraisonmagasinFacade livraisonmagasinFacade=new LivraisonmagasinFacade();
     	LignelivraisonmagasinFacade lignelivraisonmagasinFacade=new LignelivraisonmagasinFacade();
     	
@@ -111,13 +113,19 @@ public class ApprovisionemmentController implements Serializable {
     	livraisonmagasin.setDateLivraison(new Date());
     	
     	livraisonmagasinFacade.create(livraisonmagasin);
-    	
-    	for(Ligneapprovisionnement ligneapprovisionnement:selected.getLigneapprovisionnementCollection())
+    	LigneapprovisionnementFacade ligneapprovisionnementFacade=new LigneapprovisionnementFacade();
+    	List<Ligneapprovisionnement> ligneapprovisionnements=ligneapprovisionnementFacade.findAll();
+    	for(Ligneapprovisionnement ligneapprovisionnement:ligneapprovisionnements)
     	{
+    	
+    		if(ligneapprovisionnement.getIdApprovisionnement().getIdApprovisionnement()==selected.getIdApprovisionnement()){
     		Lignelivraisonmagasin lignelivraisonmagasin=new Lignelivraisonmagasin();
     		lignelivraisonmagasin.setIdLivraisonMagasin(livraisonmagasin);
     		lignelivraisonmagasin.setRefProduit(ligneapprovisionnement.getRefProd());
     		lignelivraisonmagasinFacade.create(lignelivraisonmagasin);
+    		System.out.println("aaaaaaaaaaaaaaaaaaaaaaaaaaLigneeeeeeee");
+    		}
+    		
     	}
     	
     	
