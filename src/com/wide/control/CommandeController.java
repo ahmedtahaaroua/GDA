@@ -19,10 +19,7 @@ import javax.faces.model.DataModel;
 import javax.faces.model.ListDataModel;
 import javax.inject.Named;
 
-import org.primefaces.context.RequestContext;
-
 import com.wide.dao.CommandeFacade;
-import com.wide.dao.FamilleFacade;
 import com.wide.jpaUtil.JsfUtil;
 import com.wide.jpaUtil.JsfUtil.PersistAction;
 import com.wide.model.Commande;

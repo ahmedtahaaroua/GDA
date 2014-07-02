@@ -5,10 +5,8 @@
  */
 
 package com.wide.dao;
-import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.Persistence;
-import javax.persistence.PersistenceContext;
 
 import com.wide.model.Transfert;
 

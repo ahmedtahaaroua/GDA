@@ -4,7 +4,6 @@ package com.wide.dao;
 
 import java.util.List;
 
-
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
 
