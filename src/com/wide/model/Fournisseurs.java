@@ -12,6 +12,8 @@ import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
@@ -38,8 +40,8 @@ import javax.xml.bind.annotation.XmlTransient;
 public class Fournisseurs implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
     @Basic(optional = false)
-    @NotNull
     @Column(name = "id_fournisseur")
     private Integer idFournisseur;
     @Size(max = 254)
@@ -51,8 +53,7 @@ public class Fournisseurs implements Serializable {
     @Column(name = "tel")
     private Integer tel;
     
-    @OneToMany(mappedBy = "idFournisseur")
-    private Collection<Lot> lotCollection;
+
     
     @OneToMany(mappedBy = "idFournisseur")
     private Collection<Commande> commandeCollection;
@@ -107,14 +108,6 @@ public class Fournisseurs implements Serializable {
         this.tel = tel;
     }
 
-    @XmlTransient
-    public Collection<Lot> getLotCollection() {
-        return lotCollection;
-    }
-
-    public void setLotCollection(Collection<Lot> lotCollection) {
-        this.lotCollection = lotCollection;
-    }
 
     @XmlTransient
     public Collection<Commande> getCommandeCollection() {
