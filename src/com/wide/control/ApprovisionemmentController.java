@@ -61,11 +61,11 @@ public class ApprovisionemmentController implements Serializable {
 	public ApprovisionemmentController() {
     	
     	ejbFacade=new ApprovisionemmentFacade();
-    	if (items == null) {
+    
     		approv = new ListDataModel();
     		approv.setWrappedData(ejbFacade.findAll());
 
-		}
+		
     	
     }
 

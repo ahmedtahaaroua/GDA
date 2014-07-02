@@ -37,11 +37,9 @@ public class UtilisateurController implements Serializable {
 	private List<Magasin> magasins;
     public UtilisateurController() {
     	ejbFacade=new UtilisateurFacade();
-    	if (items == null) {
 			utilisateurs = new ListDataModel();
 			utilisateurs.setWrappedData(ejbFacade.findAll());
 
-		}
     }
 
     public Utilisateur getSelected() {
@@ -95,9 +93,7 @@ public class UtilisateurController implements Serializable {
     }
 
     public List<Utilisateur> getItems() {
-        if (items == null) {
             items = getFacade().findAll();
-        }
         return items;
     }
 

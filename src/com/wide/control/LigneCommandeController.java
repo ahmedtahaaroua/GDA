@@ -32,11 +32,8 @@ public class LigneCommandeController implements Serializable {
     private DataModel lignesc;
     public LigneCommandeController() {
     	ejbFacade=new LigneCommandeFacade();
-    	if (items == null) {
     		lignesc = new ListDataModel();
     		lignesc.setWrappedData(ejbFacade.findAll());
-
-		}
     	
     }
 
@@ -91,9 +88,7 @@ public List<LigneCommande> findByCommand (int idcmd){
     }
 
     public List<LigneCommande> getItems() {
-        if (items == null) {
             items = getFacade().findAll();
-        }
         return items;
     }
 

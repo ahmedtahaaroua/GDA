@@ -74,9 +74,7 @@ public class LigneapprovisionnementController implements Serializable {
     }
 
     public List<Ligneapprovisionnement> getItems() {
-        if (items == null) {
             items = getFacade().findAll();
-        }
         return items;
     }
 

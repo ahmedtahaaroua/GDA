@@ -38,11 +38,11 @@ public class CommandeController implements Serializable {
     
     public CommandeController() {
     	ejbFacade=new CommandeFacade();
-    	if (items == null) {
+    
     		commandes = new ListDataModel();
     		commandes.setWrappedData(ejbFacade.findAll());
 
-		}
+		
     }
 
     public Commande getSelected() {
@@ -90,9 +90,9 @@ public class CommandeController implements Serializable {
     }
 
     public List<Commande> getItems() {
-        if (items == null) {
+      
             items = getFacade().findAll();
-        }
+        
         return items;
     }
 

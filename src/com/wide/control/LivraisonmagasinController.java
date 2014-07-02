@@ -1,5 +1,6 @@
 package com.wide.control;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
@@ -39,14 +40,16 @@ public class LivraisonmagasinController implements Serializable {
     List<Produit> produits;
     
     public List<Produit> getProduits() {
+    	produits=new ArrayList<Produit>();
     	LignelivraisonmagasinFacade lignelivraisonFacade=new LignelivraisonmagasinFacade();
     	List<Lignelivraisonmagasin> lignelivraisons=lignelivraisonFacade.findAll();
+    	if(!lignelivraisons.isEmpty()){
     	for(Lignelivraisonmagasin lignelivraison:lignelivraisons){
     		if(selected.getIdLivraisonMagasin()== lignelivraison.getIdLivraisonMagasin().getIdLivraisonMagasin()){
     			produits.add(lignelivraison.getRefProduit());
     		}
     	}
-    	
+    	}
     	
 		return produits;
 	}
