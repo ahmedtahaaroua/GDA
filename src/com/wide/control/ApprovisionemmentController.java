@@ -3,6 +3,7 @@ package com.wide.control;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 import java.util.ResourceBundle;
@@ -22,9 +23,15 @@ import javax.inject.Named;
 
 import com.wide.dao.ApprovisionemmentFacade;
 import com.wide.dao.FamilleFacade;
+import com.wide.dao.LignelivraisonFacade;
+import com.wide.dao.LignelivraisonmagasinFacade;
+import com.wide.dao.LivraisonmagasinFacade;
 import com.wide.jpaUtil.JsfUtil;
 import com.wide.jpaUtil.JsfUtil.PersistAction;
 import com.wide.model.Approvisionemment;
+import com.wide.model.Ligneapprovisionnement;
+import com.wide.model.Lignelivraisonmagasin;
+import com.wide.model.Livraisonmagasin;
 
 @Named("approvisionemmentController")
 @SessionScoped
@@ -95,6 +102,26 @@ public class ApprovisionemmentController implements Serializable {
     }
 
     public void update() {
+    	
+    	LivraisonmagasinFacade livraisonmagasinFacade=new LivraisonmagasinFacade();
+    	LignelivraisonmagasinFacade lignelivraisonmagasinFacade=new LignelivraisonmagasinFacade();
+    	
+    	Livraisonmagasin livraisonmagasin=new Livraisonmagasin();
+    	livraisonmagasin.setIdMagasin(selected.getIdMagasin());
+    	livraisonmagasin.setDateLivraison(new Date());
+    	
+    	livraisonmagasinFacade.create(livraisonmagasin);
+    	
+    	for(Ligneapprovisionnement ligneapprovisionnement:selected.getLigneapprovisionnementCollection())
+    	{
+    		Lignelivraisonmagasin lignelivraisonmagasin=new Lignelivraisonmagasin();
+    		lignelivraisonmagasin.setIdLivraisonMagasin(livraisonmagasin);
+    		lignelivraisonmagasin.setRefProduit(ligneapprovisionnement.getRefProd());
+    		lignelivraisonmagasinFacade.create(lignelivraisonmagasin);
+    	}
+    	
+    	
+    	
         persist(PersistAction.UPDATE, ResourceBundle.getBundle("/Bundle").getString("ApprovisionemmentUpdated"));
     }
 
